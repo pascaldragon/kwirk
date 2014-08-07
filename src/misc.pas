@@ -7,9 +7,9 @@ unit Misc; { for " The Quest of Kwirk's Castle " }
 
 interface
 
-uses Dos, MyCrt, Graph,
-     GemBase, GemInit, Pum, Mouse, KbdRep,
-     vStrSubs, Num2Str, StdSubs, DefBase, Timer;
+uses Dos, Crt,{MyCrt,} Graph, Compat,
+     {GemBase, GemInit, Pum,} Mouse, //KbdRep,
+     {vStrSubs, Num2Str, StdSubs,} DefBase{, Timer};
 
 Procedure Init1;
 Procedure Init2;
@@ -51,7 +51,7 @@ Procedure AddRoomMade(Room: Word);
 Function  GetNextRoom: Word;
 Function  IsRoomMade(Room: Word): Boolean;
 
-{$I KbdCodes.Pas}
+{.$I KbdCodes.Pas}
 Function KwirkReadKey: Word;
 Function KwirkGetKey: Word;
 Function KwirkKeyPressed: Boolean;
@@ -85,6 +85,7 @@ Procedure InitError(s: String; Title,Help: Boolean);
 
 Procedure Init1;
   begin
+  {$ifdef enable}
   if sConfig.Screen1=Detect then
     begin
     DetectGraph(sConfig.Screen1,sConfig.Res1);
@@ -103,6 +104,7 @@ Procedure Init1;
     if not ParamHelp then InitError('Sorry, graphics-card or graphics-mode not supported in this version.',True,True);
   if QuestMakerFlag and (sConfig.Screen1 in [CGA,MCGA]) and (sConfig.Res1<CgaHi) then
     InitError('Need high resolution to run the QuestMaker.',True,True);
+  {$endif}
   end;
 
 Procedure Init2;
@@ -112,7 +114,7 @@ Procedure Init2;
   i:=1; MemErr:=False;
   while (i<=nImages) and not MemErr do
     begin
-    MemErr:=MaxAvail<3*SizeOf(ImgType);
+    MemErr:={$ifndef enable}False{$else}MaxAvail<3*SizeOf(ImgType){$endif};
     if not MemErr then New(Img[i]);
     Inc(i);
     end;
@@ -125,6 +127,7 @@ Procedure Init3;
             i,j: LongInt;
           t0,t1: Real;
   begin
+  {$ifdef enable}
   ChgPalette:=False;
   if not TextKwirk and not InitGem('') then Halt;
   KwirkXSpeed:=MS2Tick(Round(100/ImgXsize));
@@ -144,6 +147,7 @@ Procedure Init3;
     KwirkXSpeed:=MS2Tick(Round(1000*KwirkSpeed/ImgXsize));
     KwirkYSpeed:=MS2Tick(Round(1000*KwirkSpeed/ImgYsize));
     end;
+  {$endif}
   end;
 
 Procedure GetImg(var F: File; i: integer);
@@ -233,7 +237,9 @@ Function LoadMazes(FN: PathStr): Boolean;
             if Copy(s,i,1)='P' then s[i]:=' ';  { Pftzen sind nur im P-Array vermerkt }
             end;
           Mazes[nMazes].M[Mazes[nMazes].ys]:=s;
+          {$ifdef enable}
           vSetLen(Mazes[nMazes].M[Mazes[nMazes].ys],MaxMazeXsize);
+          {$endif}
           end;
         NextMaze:=False;
         end;
@@ -322,7 +328,9 @@ Procedure ClrOutTextXY(x,y: LongInt; s: String);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
+    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<766) then Dec(x,40);
+    {$endif}
     end;
   y:=VgaY(y);
   tw:=TextWidth(s); th:=TextHeight(s);
@@ -350,7 +358,9 @@ Procedure OutTextXY(x,y: LongInt; s: String);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
+    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<765) then Dec(x,40);
+    {$endif}
     end;
   Graph.OutTextXY(x,VgaY(y),s);
   end;
@@ -361,7 +371,9 @@ Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
+    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<765) then Dec(x,40);
+    {$endif}
     end;
   y:=VgaY(y);
   SetColor(c1); Graph.OutTextXY(x+1,y+1,s);
@@ -377,7 +389,9 @@ Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
   begin
   if Lines=0 then exit;
   SetTextJustify(LeftText,TopText);
+  {$ifdef enable}
   if DefaultSpeedFont then SetTextDefault else SetTextStyle(TriplexFont,HorizDir,1);
+  {$endif}
   GetTextSettings(ti);
   if ti.Font<>DefaultFont then
     begin
@@ -388,14 +402,18 @@ Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
       if w>w1 then begin w1:=w; l1:=length(sp^) end;
       sp:=Pointer(LongInt(sp)+Size);
       end;
+    {$ifdef enable}
     CHight:=TextHeight('Mg')+5; LnTab:=cHight+5;
     if GetMaxY<200 then begin Dec(LnTab,3); Dec(cHight,5) end;
     cWidth:=(w1 div l1)+1; RowTab:=cWidth;
+    {$endif}
     end;
+  {$ifdef enable}
   OneTimeLines:=OneTime;
   XPopUpMenue(a,Size,Lines,10050,10050,y,Offset,True,True,False,True,False,False);
   OneTimeLines:=32;                            { Pum-Default    }
   if not DefaultSpeedFont then SetTextDefault  { Gem cWidth ... }
+  {$endif}
   end;
 
 Const MaxMazeMenEntrys = 100;
@@ -439,7 +457,9 @@ Function MazeMenue(FN0: PathStr): PathStr;
           s: String;
           l: Byte absolute s;
   begin
+  {$ifdef enable}
   vUpcaseStr(FN0);
+  {$endif}
   FN0:=Copy(FN0,1,Pos('.',FN0)-1);
   FindFirst('*.Maz',Archive,sr);
   n:=0;
@@ -465,7 +485,9 @@ Function MazeMenue(FN0: PathStr): PathStr;
   i:=MazeNr; if (i<1) or (i>n) then i:=1;
   for j:=1 to n do
     begin
+    {$ifdef enable}
     vUpCaseStr(d[j].FN);
+    {$endif}
     if FN0=d[j].FN then i:=j;
     end;
   XPum(d[0].Title,SizeOf(EntryType),n,6,i,MazePumOffs);
@@ -620,7 +642,7 @@ Procedure WriteMazeNr(n: integer);
     SetTextStyle(TriplexFont,HorizDir,1);
     OutTextXYs(540,160,'Room',Black,Yellow);
     {Bar(596,162,620,180);}
-    ClrOutTextXY(596,160,Int2StrL(n,2));
+    ClrOutTextXY(596,160,Copy(Int2StrL(n,2), 1, 2));
     OutTextXYs(596,160,Int2Str(n),Black,Yellow);
     end;
   end;
@@ -665,7 +687,7 @@ Procedure GetTimeStr(t: LongInt; var ts: String);
   end;
 
 Procedure WriteTime1(t: LongInt);
-  var s: String[20];
+  var s: String;
   begin
   GetTimeStr(t,s);
   if TextKwirk then
@@ -686,7 +708,7 @@ Procedure WriteTime1(t: LongInt);
   end;
 
 Procedure WriteTime2(t: LongInt);
-  var s: String[20];
+  var s: String;
   begin
   GetTimeStr(t,s);
   if TextKwirk then
@@ -1185,7 +1207,9 @@ Procedure ShowHelp;
   begin
   if GetMaxX<320 then exit;
   IncMouseHide;
+  {$ifdef enable}
   if iConfig.Screen1=HercMono then begin xp:=65; x:=30 end else begin xp:=120; x:=85 end;
+  {$endif}
   yp:=110; y:=160;
   if not QuestMakerFlag then ClearHelpKey;
   SetFillStyle(SolidFill,LightGray);
@@ -1448,4 +1472,4 @@ Function LastChar: Char;
   if LastKey<255 then LastChar:=Char(LastKey);
   end;
 
-end.
+end.

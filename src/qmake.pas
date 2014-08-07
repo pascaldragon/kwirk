@@ -13,7 +13,7 @@ Procedure QuestMaker;
 
 implementation
 
-uses MyCrt, Graph, GemInit, GrInput, Pum, Mouse, StdSubs, vStrSubs, DefBase, Misc, PlayKwrk;
+uses Crt, Graph, Compat,{GemInit, GrInput, Pum,} Mouse, {StdSubs, vStrSubs, }DefBase, Misc, PlayKwrk;
 
 Procedure GetRoomName(var s: String);
   begin
@@ -323,7 +323,9 @@ Procedure MakeQuest;
         Mazes[nMazes].xs:=20; Mazes[nMazes].ys:=18;
         for y:=1 to MaxMazeYsize do
           begin
+          {$ifdef enable}
           vNChar('W',MaxMazeXsize,Mazes[nMazes].M[y]);
+          {$endif}
           for x:=1 to MaxMazeXsize do
             Mazes[nMazes].P[y,x]:=False;
           end;
@@ -341,7 +343,9 @@ Procedure QuestMaker;
     WriteQuestMakerTitle;
     WriteLevel('1991 by Joe M.   ');
     MazFN:=MazeMenue(MazFN);
+    {$ifdef enable}
     if MazFN='' then begin ExitGem; Halt(0) end;
+    {$endif}
     if MazFN='.Maz'
       then begin
         nMazes:=0;
@@ -353,7 +357,9 @@ Procedure QuestMaker;
         end
       else if LoadMazes(MazFN) then MakeQuest;
   until LastKey=KeyF3;
+  {$ifdef enable}
   ExitGem;
+  {$endif}
   if TextModeAtProgrammStart>=0 then TextMode(TextModeAtProgrammStart);
   GotoXY(1,1); TextColor(White);
   writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
@@ -362,4 +368,4 @@ Procedure QuestMaker;
   Halt(0)
   end;
 
-end.
+end.

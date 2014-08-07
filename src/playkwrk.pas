@@ -12,7 +12,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
 
 implementation
 
-uses MyCrt,KbdRep,Graph,StdSubs,Misc,Timer,KW_Snd,Chat;
+uses Crt,{KbdRep,}Graph,{StdSubs,}Misc,{Timer,}KW_Snd,Chat,Compat;
 
 Const ChangeKbdVector = True;
 
@@ -485,8 +485,10 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
   First:=True;
   t0:=round(rTime);
   RoomStartTime:=t0;
+  {$ifdef enable}
   KbdRep.ChangeKbdVector:=ChangeKbdVector;
   if not QuickMoving then InstallKbdRepHandler;
+  {$endif}
   KbdRepeated:=False;
   Try:=0; a0:=False;
   RefT1:=False; RefT2:=False;
@@ -508,7 +510,9 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
     ActiveKwirk:=0; ChangeKwirk(Maze);
     repeat
       {repeat}
+      {$ifdef enable}
         a:=KbdKeyDown;
+      {$endif}
 
         if ShowMovingTime then
           begin
@@ -552,6 +556,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
       {until c<>0;}
       case c of
         0:;
+        {$ifdef enable}
         KeyF1: if not TextKwirk then
                  begin
                  ShowHelp;
@@ -560,11 +565,12 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
                  DrawKwirk;
                  JumpKwirk;
                  end;
+        {$endif}
         Ord('N')-Ord('@'): ChangeKwirk(Maze);
-        CsrRg,Ord('6'): begin SetKwirkDir('>'); MoveKwirk(Maze,1,0) end;
-        CsrUp,Ord('8'): begin SetKwirkDir('^'); MoveKwirk(Maze,0,-1) end;
-        CsrLf,Ord('4'): begin SetKwirkDir('<'); MoveKwirk(Maze,-1,0) end;
-        CsrDn,Ord('2'): begin SetKwirkDir('V'); MoveKwirk(Maze,0,1) end;
+        {$ifdef enable}CsrRg,{$endif}Ord('6'): begin SetKwirkDir('>'); MoveKwirk(Maze,1,0) end;
+        {$ifdef enable}CsrUp,{$endif}Ord('8'): begin SetKwirkDir('^'); MoveKwirk(Maze,0,-1) end;
+        {$ifdef enable}CsrLf,{$endif}Ord('4'): begin SetKwirkDir('<'); MoveKwirk(Maze,-1,0) end;
+        {$ifdef enable}CsrDn,{$endif}Ord('2'): begin SetKwirkDir('V'); MoveKwirk(Maze,0,1) end;
         {iBckSp: {MoveBack; {im Moment noch fr Retry verwendet}
         {iHome,Ord('Z')-Ord('@'): {MoveBack; {im Moment noch fr Retry verwendet}
         Ord('+'),Ord('-'):;
@@ -574,7 +580,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
         begin
         if c=Ord('M')-Ord('@') then {if Maze.nKwirks>1 then} ChangeKwirk(Maze);(**)
         end;
-      bRetryRoom:=(c=CsrHm) or (c=Ord('Z')-Ord('@'));
+      bRetryRoom:={$ifdef enable}(c=CsrHm) or {$endif}(c=Ord('Z')-Ord('@'));
       {if TextKwirk and CopyVideo then DoChat(Word(c));}
       if Maze.Jump[ActiveKwirk] and ((MazeP.M[KwirkY,KwirkX]='J') or
          (KwirkX<=1) or (KwirkX>=Maze.xs) or (KwirkY<=1) or (KwirkY>=Maze.ys)) then
@@ -599,8 +605,8 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
       bBorder:=(Maze.nKwirks<=0) or (KwirkX<=1) or (KwirkX>=Maze.xs) or (KwirkY<=1) or (KwirkY>=Maze.ys);
       bAllAim:=Maze.nKwirks<=0;
     until bAllAim or bBorder or (not TextKwirk and (LastKey=Escap)) or (LastKey=ord('Q')-Ord('@')) or
-          (LastKey=KeyTb) or (LastKey=Ord('+')) or (LastKey=ShfTb) or (LastKey=Ord('-')) or
-          (LastKey=KeyF3) or (LastKey=Alt_X) or bRetryRoom or CheckTimeout(0);
+          {$ifdef enable}(LastKey=KeyTb) or {$endif}(LastKey=Ord('+')) or {$ifdef enable}(LastKey=ShfTb) or {$endif}(LastKey=Ord('-')) or
+          {$ifdef enable}(LastKey=KeyF3) or (LastKey=Alt_X) or {$endif}bRetryRoom or CheckTimeout(0);
   until not bRetryRoom;
   t:=round(rTime); if t<>t0 then begin writeTime1(t-RoomStartTime); writeTime2(t-LevelStartTime) end;
   PlayKwirk:=bBorder or bAllAim;
@@ -639,7 +645,9 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
       end;
     PlayKwirk:=True;
     end;
+  {$ifdef enable}
   RemoveKbdRepHandler;
+  {$endif}
   end;
 
-end.
+end.

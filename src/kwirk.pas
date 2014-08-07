@@ -8,8 +8,8 @@
 Program Kwirk; { " The Quest of Kwirk's Castle " }
 { $D-,L-}
 
-uses MyCrt, Graph, GemBase, Str2Num, GemInit,
-     StdSubs, vStrSubs, Num2Str, DefBase, QMake, Misc, PlayKwrk, JME_Demo, Timer, KW_Snd;
+uses Crt, Graph, {GemBase,} {Str2Num,} {GemInit,}
+     {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, QMake, Misc, PlayKwrk, JME_Demo, {Timer, }KW_Snd, Compat;
 
 Procedure WriteSyntax(Const Fehler: String);
   Function Bool2OnOff(a: Boolean): String;
@@ -87,6 +87,7 @@ Procedure GetParameters;
         if s='RROFF' then RandRadius:=False else
         if s='TIME' then ShowMovingTime:=True else
         if s='M' then QuestMakerFlag:=True else
+        {$ifdef enable}
         if s='VGA'   then begin sConfig.Screen1:=Vga;      sConfig.Res1:=VgaHi      end else
         if s='EGA'   then begin sConfig.Screen1:=Ega;      sConfig.Res1:=EgaHi      end else
         if s='EGALO' then begin sConfig.Screen1:=Ega;      sConfig.Res1:=EgaLo      end else
@@ -98,6 +99,7 @@ Procedure GetParameters;
         if s='CGAC2' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaC2      end else
         if s='CGAC3' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaC3      end else
         if s='CGAHI' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaHi      end else
+        {$endif}
         { if copy(s,1,1)='I' then ImgFN:=Copy(s,2,255)+'.Img' else }
         if copy(s,1,1)='S' then begin KwirkSpeed:=Str2Int(Copy(s,2,255))/10 end else
         if copy(s,1,1)='B' then KwirkBumpSteps:=Str2Int(Copy(s,2,255)) else
@@ -130,7 +132,9 @@ Procedure GetParameters;
   if AnsiVideo then
     begin
     DosInput:=True;
+    {$ifdef enable}
     EndeAttr:=7;
+    {$endif}
     end;
 {  if DosVideo then DirectVideo:=False;}
   if TextKwirk then
@@ -149,7 +153,9 @@ Procedure PlayMazeFile;
   if UserName<>'' then Cfg.WriteKeyName('LastQuest',MazFN);
   if not LoadMazes(MazFN) then
     begin
+    {$ifdef enable}
     ExitGem;
+    {$endif}
     InitError('IO-error while reading the maze file ['+MazFn+']',False,False);
     end;
   WriteLevel(QuestName);
@@ -202,7 +208,9 @@ if not TextKwirk then
   begin
   if not LoadImages(ImgFn) then
     begin
+    {$ifdef enable}
     ExitGem;
+    {$endif}
     InitError('IO-error while reading image file ['+ImgFn+']',False,False);
     end;
   end;
@@ -242,7 +250,9 @@ repeat
       if Room>nMazes then begin Room:=1; Inc(MazeNr); MazFN:='.' end;
     end;
 until (MazFN='') or (LastKey=KeyF3) or (LastKey=ALT_X) or bGivenMaze or TextKwirk;
+{$ifdef enable}
 {if not TextKwirk then{} ExitGem;
+{$endif}
 Cfg.Done;
 if not TextKwirk then
   begin
@@ -257,4 +267,4 @@ GotoXY(1,1); TextColor(White);
 writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
 NormVideo;
 writeln;
-end.
+end.

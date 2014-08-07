@@ -6,11 +6,14 @@ Unit Chat;
 
 interface
 
-Uses MyCrt;
+Uses Crt;
 
 Procedure DoChat(Key: Word);
 
 implementation
+
+uses
+  Compat;
 
 Type PChatWin=^TChatWin;
      TChatWin=Object
@@ -470,4 +473,4 @@ Procedure DoChat(Key: Word);
     end;
   end;
 
-end.
+end.

@@ -7,7 +7,7 @@ unit JME_Demo;
 
 interface
 
-uses MyCrt, Misc, DefBase;
+uses Crt, Misc, DefBase;
 
 Procedure ShowJME;
 
@@ -96,7 +96,9 @@ Procedure WriteLoading(x,y,tc,bc: integer);
 Procedure ShowJME;
   begin
   TextModeAtProgrammStart:=LastMode;
+  {$ifdef enable}
   if VWdt<80 then TextMode(Co80);
+  {$endif}
   TextColor(LightGray); TextBackground(Black); ClrScr;
   {HideTextCursor;}
   WriteJMELogo(25,2,Yellow,Black);
@@ -111,4 +113,4 @@ Procedure ShowJME;
   GotoXY(1,25); NormVideo;
   end;
 
-end.
+end.

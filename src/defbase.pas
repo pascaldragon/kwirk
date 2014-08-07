@@ -119,4 +119,4 @@ var    Img: Array[1..nImages] of ref_Img;
 
 implementation
 
-end.
+end.
