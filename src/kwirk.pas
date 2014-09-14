@@ -242,7 +242,7 @@ if not bGivenMaze then
 repeat
   if not bGivenMaze and not TextKwirk then
     MazFN:=MazeMenue(MazFN);
-  vUpcaseStr(MazFN);
+  //vUpcaseStr(MazFN);
   if MazFN<>'' then
     begin
     PlayMazeFile;
