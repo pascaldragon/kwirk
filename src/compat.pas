@@ -26,6 +26,8 @@ function ReadTimerMS(aTime: Integer): Integer;
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
 function ReadTimerTick(aTime: Integer): Integer;
 
+function MS2Tick(aValue: Integer): Integer;
+
 procedure SetTextDefault;
 
 function StringInput(aArg1, aArg2: Integer; aLablel: String;
@@ -66,6 +68,7 @@ var
   KbdRepeated: Boolean = False;
   LastInputDos: Boolean = False;
   rTime: Single = 0;
+  ChgPalette: Boolean = False;
 
 var
   sConfig: TGraphConfig = ( Screen1: Detect; Res1: Default );
@@ -123,6 +126,11 @@ end;
 function ReadTimerTick(aTime: Integer): Integer;
 begin
 
+end;
+
+function MS2Tick(aValue: Integer): Integer;
+begin
+  Result := aValue;
 end;
 
 procedure SetTextDefault;

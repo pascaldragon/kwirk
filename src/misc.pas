@@ -128,9 +128,12 @@ Procedure Init3;
             i,j: LongInt;
           t0,t1: Real;
   begin
-  {$ifdef enable}
   ChgPalette:=False;
+  {$ifdef enable}
   if not TextKwirk and not InitGem('') then Halt;
+  {$endif}
+  if not TextKwirk then
+    InitGraph(sConfig.Screen1, sConfig.Res1, '');
   KwirkXSpeed:=MS2Tick(Round(100/ImgXsize));
   KwirkYSpeed:=MS2Tick(Round(100/ImgYsize));
   JumpSpeed  :=MS2Tick(40);
@@ -148,7 +151,6 @@ Procedure Init3;
     KwirkXSpeed:=MS2Tick(Round(1000*KwirkSpeed/ImgXsize));
     KwirkYSpeed:=MS2Tick(Round(1000*KwirkSpeed/ImgYsize));
     end;
-  {$endif}
   end;
 
 Procedure GetImg(var F: File; i: integer);
