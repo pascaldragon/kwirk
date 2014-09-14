@@ -8,6 +8,10 @@ unit Compat;
 
 interface
 
+uses
+  ptcgraph,
+  Config;
+
 function Int2StrL(aValue, aLength: Integer): String; inline;
 function Int2Str(aValue: Integer): String; inline;
 function Str2Int(aStr: String): Integer; inline;
@@ -62,6 +66,9 @@ var
   KbdRepeated: Boolean = False;
   LastInputDos: Boolean = False;
   rTime: Single = 0;
+
+var
+  sConfig: TGraphConfig = ( Screen1: Detect; Res1: Default );
 
 implementation
 

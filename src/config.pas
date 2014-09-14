@@ -18,6 +18,11 @@ type
     procedure SetAktGroupName(aGroup: String);
   end;
 
+  TGraphConfig = record
+    Screen1: SmallInt;
+    Res1: SmallInt;
+  end;
+
 implementation
 
 { TConfig }
