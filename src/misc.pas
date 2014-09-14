@@ -7,7 +7,7 @@ unit Misc; { for " The Quest of Kwirk's Castle " }
 
 interface
 
-uses Dos, Crt,{MyCrt,} Graph, Compat,
+uses Dos, Crt,{MyCrt,} ptcGraph, Compat,
      {GemBase, GemInit, Pum,} Mouse, //KbdRep,
      {vStrSubs, Num2Str, StdSubs,} DefBase{, Timer};
 
@@ -303,7 +303,7 @@ Procedure SetTextStyle(Font,Direction,CharSize: Word);
   begin
   SetUserCharSize(CharSize,1,CharSize,1);
   SetUserCharSize(1,2,1,4);
-  if (GetMaxY<200) and (CharSize<=1) then begin Graph.SetTextStyle(DefaultFont,Direction,1); exit end;
+  if (GetMaxY<200) and (CharSize<=1) then begin PtcGraph.SetTextStyle(DefaultFont,Direction,1); exit end;
   Case CharSize of
     1: begin m:=3; d:=5 end;
     2: begin m:=2; d:=3 end;
@@ -311,13 +311,13 @@ Procedure SetTextStyle(Font,Direction,CharSize: Word);
     4: begin m:=1; d:=1 end;
     end;
   SetUserCharSize(m*((GetMaxX+1) div 20),d*32,m*((GetMaxY+1) div 20),d*24);
-  Graph.SetTextStyle(Font,Direction,0);
+  PtcGraph.SetTextStyle(Font,Direction,0);
   end;
 
 Function VgaX(x: LongInt): LongInt; begin VgaX:=(x*(GetMaxX+1)) div 640 end;
 Function VgaY(y: LongInt): LongInt; begin VgaY:=(y*(GetMaxY+1)) div 480 end;
 Procedure Bar(x1,y1,x2,y2: integer);
-  begin Graph.Bar(VgaX(x1),VgaY(y1),VgaX(x2),VgaY(y2)) end;
+  begin PtcGraph.Bar(VgaX(x1),VgaY(y1),VgaX(x2),VgaY(y2)) end;
 
 Procedure ClrOutTextXY(x,y: LongInt; s: String);
   var  ti: TextSettingsType;
@@ -348,7 +348,7 @@ Procedure ClrOutTextXY(x,y: LongInt; s: String);
     BottomText: y:=y-th;
     end;
   SetFillStyle(SolidFill,Black);
-  Graph.Bar(x,y+1*ord(ti.Font<>DefaultFont),
+  PtcGraph.Bar(x,y+1*ord(ti.Font<>DefaultFont),
             x+tw+4*ord(ti.Font<>DefaultFont),y+th+5*ord(ti.Font<>DefaultFont));
   end;
 
@@ -362,7 +362,7 @@ Procedure OutTextXY(x,y: LongInt; s: String);
     if (iConfig.Screen1=HercMono) and (x<765) then Dec(x,40);
     {$endif}
     end;
-  Graph.OutTextXY(x,VgaY(y),s);
+  PtcGraph.OutTextXY(x,VgaY(y),s);
   end;
 
 Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
@@ -376,8 +376,8 @@ Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
     {$endif}
     end;
   y:=VgaY(y);
-  SetColor(c1); Graph.OutTextXY(x+1,y+1,s);
-  SetColor(c2); Graph.OutTextXY(x,y,s);
+  SetColor(c1); PtcGraph.OutTextXY(x+1,y+1,s);
+  SetColor(c2); PtcGraph.OutTextXY(x,y,s);
   end;
 
 Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
@@ -1058,7 +1058,7 @@ Procedure DrawImage(ix,iy: integer; Img: Pointer; dx,dy: integer; PutMode: integ
         if PutMode=CopyPut then
           begin
           SetFillStyle(SolidFill,Black);
-          Graph.Bar(x,y,x+ImgXsize-1,y+ImgYsize-1);
+          PtcGraph.Bar(x,y,x+ImgXsize-1,y+ImgYsize-1);
           end;
         end
       else PutImage(x,y,Img^,PutMode);
@@ -1126,7 +1126,7 @@ Procedure DrawMazeImage(var Maze: MazeType; ix,iy: integer);
     if ((ImgMaze[iy,ix].Source1=0) and (ImgMaze[iy,ix].Source2=0)) then
       begin
       SetFillStyle(SolidFill,Black);
-      Graph.Bar(x,y,x+ImgXsize-1,y+ImgYsize-1);
+      PtcGraph.Bar(x,y,x+ImgXsize-1,y+ImgYsize-1);
       end;
     DecMouseHide;
     end;

@@ -8,7 +8,7 @@
 Program Kwirk; { " The Quest of Kwirk's Castle " }
 { $D-,L-}
 
-uses Crt, Graph, {GemBase,} {Str2Num,} {GemInit,}
+uses Crt, ptcgraph, {GemBase,} {Str2Num,} {GemInit,}
      {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, QMake, Misc, PlayKwrk, JME_Demo, {Timer, }KW_Snd, Compat;
 
 Procedure WriteSyntax(Const Fehler: String);

@@ -12,7 +12,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
 
 implementation
 
-uses Crt,{KbdRep,}Graph,{StdSubs,}Misc,{Timer,}KW_Snd,Chat,Compat;
+uses Crt,{KbdRep,}ptcGraph,{StdSubs,}Misc,{Timer,}KW_Snd,Chat,Compat;
 
 Const ChangeKbdVector = True;
 
