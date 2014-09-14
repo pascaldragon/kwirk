@@ -87,7 +87,6 @@ Procedure GetParameters;
         if s='RROFF' then RandRadius:=False else
         if s='TIME' then ShowMovingTime:=True else
         if s='M' then QuestMakerFlag:=True else
-        {$ifdef enable}
         if s='VGA'   then begin sConfig.Screen1:=Vga;      sConfig.Res1:=VgaHi      end else
         if s='EGA'   then begin sConfig.Screen1:=Ega;      sConfig.Res1:=EgaHi      end else
         if s='EGALO' then begin sConfig.Screen1:=Ega;      sConfig.Res1:=EgaLo      end else
@@ -99,7 +98,6 @@ Procedure GetParameters;
         if s='CGAC2' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaC2      end else
         if s='CGAC3' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaC3      end else
         if s='CGAHI' then begin sConfig.Screen1:=Cga;      sConfig.Res1:=CgaHi      end else
-        {$endif}
         { if copy(s,1,1)='I' then ImgFN:=Copy(s,2,255)+'.Img' else }
         if copy(s,1,1)='S' then begin KwirkSpeed:=Str2Int(Copy(s,2,255))/10 end else
         if copy(s,1,1)='B' then KwirkBumpSteps:=Str2Int(Copy(s,2,255)) else
