@@ -39,6 +39,9 @@ procedure PushMouse;
 procedure PopMouse;
 procedure MouseShape(aShape: Integer);
 
+function InitGem(const aPath: String): Boolean;
+procedure ExitGem;
+
 function ReadKey2: Word;
 
 const
@@ -167,6 +170,17 @@ end;
 procedure MouseShape(aShape: Integer);
 begin
 
+end;
+
+function InitGem(const aPath: String): Boolean;
+begin
+  InitGraph(sConfig.Screen1, sConfig.Res1, '');
+  Result := True;
+end;
+
+procedure ExitGem;
+begin
+  Closegraph;
 end;
 
 function ReadKey2: Word;

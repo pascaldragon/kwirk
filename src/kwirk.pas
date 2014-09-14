@@ -153,9 +153,7 @@ Procedure PlayMazeFile;
   if UserName<>'' then Cfg.WriteKeyName('LastQuest',MazFN);
   if not LoadMazes(MazFN) then
     begin
-    {$ifdef enable}
     ExitGem;
-    {$endif}
     InitError('IO-error while reading the maze file ['+MazFn+']',False,False);
     end;
   WriteLevel(QuestName);
@@ -208,9 +206,7 @@ if not TextKwirk then
   begin
   if not LoadImages(ImgFn) then
     begin
-    {$ifdef enable}
     ExitGem;
-    {$endif}
     InitError('IO-error while reading image file ['+ImgFn+']',False,False);
     end;
   end;
@@ -250,9 +246,7 @@ repeat
       if Room>nMazes then begin Room:=1; Inc(MazeNr); MazFN:='.' end;
     end;
 until (MazFN='') or (LastKey=KeyF3) or (LastKey=ALT_X) or bGivenMaze or TextKwirk;
-{$ifdef enable}
 {if not TextKwirk then{} ExitGem;
-{$endif}
 Cfg.Done;
 if not TextKwirk then
   begin
