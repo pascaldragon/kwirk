@@ -21,7 +21,7 @@ procedure vUpcaseStr(var aStr: String); inline;
 procedure IncMouseHide;
 procedure DecMouseHide;
 
-procedure StartTimer(aTime: Integer);
+procedure StartTimer(var aTime: Integer);
 function ReadTimerMS(aTime: Integer): Integer;
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
 function ReadTimerTick(aTime: Integer): Integer;
@@ -108,14 +108,14 @@ begin
 
 end;
 
-procedure StartTimer(aTime: Integer);
+procedure StartTimer(var aTime: Integer);
 begin
-
+  aTime := Trunc((Now - Date) * 24 * 60 * 60 * 1000);
 end;
 
 function ReadTimerMS(aTime: Integer): Integer;
 begin
-
+  Result := Trunc((Now - Date) * 24 * 60 * 60 * 1000 - aTime);
 end;
 
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
@@ -125,7 +125,7 @@ end;
 
 function ReadTimerTick(aTime: Integer): Integer;
 begin
-
+  Result := 1;
 end;
 
 function MS2Tick(aValue: Integer): Integer;
