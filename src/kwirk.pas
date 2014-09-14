@@ -3,7 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. *)
 
 {$A-,B-,E+,F-,I-,N+,O-,R-,S+,V-}
-{$M 65520,0,655360}
+{.$M 65520,0,655360}
 {M 8000,0,655360}
 Program Kwirk; { " The Quest of Kwirk's Castle " }
 { $D-,L-}
