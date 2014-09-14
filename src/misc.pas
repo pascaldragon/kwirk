@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. *)
 
 unit Misc; { for " The Quest of Kwirk's Castle " }
+{$I-}
 { $D-,L-}
 
 interface
