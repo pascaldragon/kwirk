@@ -13,7 +13,7 @@ interface
 uses Dos,Config;
 
 const       nImages = 112;
-      MaxImgMemSize = 500;
+      MaxImgMemSize = {$ifdef fpc}1500{$else}500{$endif};
        MaxMazeXsize = 20; { 40; {}
        MaxMazeYsize = 18; { 18; {}
            MaxMazes = 50; { 50; {}

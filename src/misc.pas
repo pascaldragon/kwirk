@@ -86,7 +86,6 @@ Procedure InitError(s: String; Title,Help: Boolean);
 
 Procedure Init1;
   begin
-  {$ifdef enable}
   if sConfig.Screen1=Detect then
     begin
     DetectGraph(sConfig.Screen1,sConfig.Res1);
@@ -102,10 +101,11 @@ Procedure Init1;
   if (sConfig.Screen1=HercMono) and (sConfig.Res1=HercMonoHi) then ImgFN:='KwirkHrc.Img' else
   if (sConfig.Screen1=Cga)      and (sConfig.Res1=CgaHi)      then ImgFN:='KwirkCHi.Img' else
   if (sConfig.Screen1=Cga)      and (sConfig.Res1 in [CgaC0..CgaC3]) then ImgFN:='KwirkCga.Img' else
-    if not ParamHelp then InitError('Sorry, graphics-card or graphics-mode not supported in this version.',True,True);
+    (* fallback to VGA images for now *)
+    ImgFN := 'ptcimages.img';
+    //if not ParamHelp then InitError('Sorry, graphics-card or graphics-mode not supported in this version.',True,True);
   if QuestMakerFlag and (sConfig.Screen1 in [CGA,MCGA]) and (sConfig.Res1<CgaHi) then
     InitError('Need high resolution to run the QuestMaker.',True,True);
-  {$endif}
   end;
 
 Procedure Init2;
@@ -166,19 +166,24 @@ Procedure GetImg(var F: File; i: integer);
 Function LoadImages(FN: PathStr): Boolean;
   var F: File;
       i: integer;
-    x,y: word;
+    x,y: {$ifdef fpc}longword{$else}word{$endif};
   begin
   InOutRes:=0;
   Assign(F,FN); Reset(F,1);
   if InOutRes=0 then
     begin
-    BlockRead(F,x,2);
-    BlockRead(F,y,2);
+    BlockRead(F,x,{$ifdef fpc}4{$else}2{$endif});
+    BlockRead(F,y,{$ifdef fpc}4{$else}2{$endif});
     end;
   if InOutRes=0 then
     begin
+    {$ifdef fpc}
+    ImgXsize := x;
+    ImgXsize := y;
+    {$else}
     ImgXsize:=x+1;
     ImgYsize:=y+1;
+    {$endif}
     end;
   Reset(F,1);
   i:=1;
