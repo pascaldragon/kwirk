@@ -28,6 +28,8 @@ function ReadTimerTick(aTime: Integer): Integer;
 
 function MS2Tick(aValue: Integer): Integer;
 
+function rTime: Single;
+
 procedure SetTextDefault;
 
 function StringInput(aArg1, aArg2: Integer; aLablel: String;
@@ -75,7 +77,6 @@ var
   ForceVideo: Boolean = False;
   KbdRepeated: Boolean = False;
   LastInputDos: Boolean = False;
-  rTime: Single = 0;
   ChgPalette: Boolean = False;
 
 var
@@ -139,6 +140,11 @@ end;
 function MS2Tick(aValue: Integer): Integer;
 begin
   Result := aValue;
+end;
+
+function rTime: Single;
+begin
+  Result := Time * 24 * 3600;
 end;
 
 procedure SetTextDefault;
