@@ -22,7 +22,7 @@ procedure IncMouseHide;
 procedure DecMouseHide;
 
 procedure StartTimer(var aTime: Integer);
-function ReadTimerMS(aTime: Integer): Integer;
+function ReadTimerMS(var aTime: Integer): Integer;
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
 function ReadTimerTick(aTime: Integer): Integer;
 
@@ -122,9 +122,13 @@ begin
   aTime := Trunc((Now - Date) * 24 * 60 * 60 * 1000);
 end;
 
-function ReadTimerMS(aTime: Integer): Integer;
+function ReadTimerMS(var aTime: Integer): Integer;
+var
+  newtime: Integer;
 begin
-  Result := Trunc((Now - Date) * 24 * 60 * 60 * 1000 - aTime);
+  newtime := Trunc((Now - Date) * 24 * 60 * 60 * 1000);
+  Result := newtime - aTime;
+  aTime := newtime;
 end;
 
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
