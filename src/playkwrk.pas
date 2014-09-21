@@ -464,7 +464,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
   var         c: Word;
            Maze: MazeType;
               i: integer;
-            Try: integer;
+            _Try: integer;
   RoomStartTime: LongInt;
            t,t0: LongInt;
               a: Boolean;
@@ -490,7 +490,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
   if not QuickMoving then InstallKbdRepHandler;
   {$endif}
   KbdRepeated:=False;
-  Try:=0; a0:=False;
+  _Try:=0; a0:=False;
   RefT1:=False; RefT2:=False;
   repeat
     Maze:=MazeP;
@@ -504,7 +504,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
       writeTime2(t-LevelStartTime);
       First:=False
       end;
-    Inc(Try); WriteAttempt(Try);
+    Inc(_Try); WriteAttempt(_Try);
     for i:=1 to MaxKwirksPerMaze do Maze.Jump[i]:=True;
     ClearKbdBuffer; c:=0;
     ActiveKwirk:=0; ChangeKwirk(Maze);
