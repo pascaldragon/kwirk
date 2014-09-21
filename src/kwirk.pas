@@ -10,7 +10,7 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 {M 8000,0,655360}
 { $D-,L-}
 
-uses Crt, ptcgraph, {GemBase,} {Str2Num,} {GemInit,}
+uses Crt, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
      {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, QMake, Misc, PlayKwrk, JME_Demo, {Timer, }KW_Snd, Compat;
 
 Procedure WriteSyntax(Const Fehler: String);

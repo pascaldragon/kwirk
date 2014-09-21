@@ -10,7 +10,7 @@ unit Compat;
 interface
 
 uses
-  ptcgraph,
+  GraphUnit,
   Config;
 
 function Int2StrL(aValue, aLength: Integer): String; inline;

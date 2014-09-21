@@ -15,7 +15,7 @@ Procedure QuestMaker;
 
 implementation
 
-uses Crt, ptcGraph, Compat,{GemInit, GrInput, Pum,} Mouse, {StdSubs, vStrSubs, }DefBase, Misc, PlayKwrk;
+uses Crt, GraphUnit, Compat,{GemInit, GrInput, Pum,} Mouse, {StdSubs, vStrSubs, }DefBase, Misc, PlayKwrk;
 
 Procedure GetRoomName(var s: String);
   begin
