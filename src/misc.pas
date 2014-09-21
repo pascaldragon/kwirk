@@ -465,7 +465,7 @@ Function MazeMenue(FN0: PathStr): PathStr;
   vUpcaseStr(FN0);
   {$endif}
   FN0:=Copy(FN0,1,Pos('.',FN0)-1);
-  FindFirst('*.Maz',Archive,sr);
+  FindFirst('*.maz',Archive,sr);
   n:=0;
   d[n].Title:='Table of Contents';
   while (DosError=0) and (n<MaxMazeMenEntrys) do
@@ -496,7 +496,7 @@ Function MazeMenue(FN0: PathStr): PathStr;
     end;
   XPum(d[0].Title,SizeOf(EntryType),n,6,i,MazePumOffs);
   i:=abs(i); MazeNr:=i;
-  if i=0 then MazeMenue:='' else MazeMenue:=d[i].FN+'.Maz';
+  if i=0 then MazeMenue:='' else MazeMenue:=d[i].FN+'.maz';
   end;
 
 Const  RoomPumOffs: integer = 1;
