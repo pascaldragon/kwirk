@@ -138,7 +138,7 @@ end;
 
 function ReadTimerTick(aTime: Integer): Integer;
 begin
-  Result := 1;
+  Result := Trunc((Now - Date) * 24 * 60 * 60 * 1000) - aTime;
 end;
 
 function MS2Tick(aValue: Integer): Integer;
