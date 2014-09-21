@@ -4,7 +4,8 @@
 
 unit Compat;
 
-{$mode objfpc}
+{$define use_objfpc}
+{$I kwirkdefs.inc}
 
 interface
 

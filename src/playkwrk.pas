@@ -3,8 +3,10 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. *)
 
 unit PlayKwrk; { for " The Quest of Kwirk's Castle " }
-{ $D+,L+} { $D-,L-}
 interface
+
+{$I kwirkdefs.inc}
+{ $D+,L+} { $D-,L-}
 
 uses DefBase;
 

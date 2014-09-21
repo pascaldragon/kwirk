@@ -3,6 +3,8 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. *)
 
 unit JME_Demo;
+
+{$I kwirkdefs.inc}
 {$D+,L+} { $D-,L-}
 
 interface

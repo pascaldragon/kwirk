@@ -8,6 +8,8 @@ FExpand, FSplit raus, ...
 
 Unit DefBase; { for " The Quest of Kwirk's Castle " }
 
+{$I kwirkdefs.inc}
+
 interface
 
 uses Dos,Config;
