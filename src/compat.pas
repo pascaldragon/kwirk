@@ -47,18 +47,24 @@ function ReadKey2: Word;
 const
   HoleCrossHair = 1;
 
-  KeyF1 = 1;
-  KeyF2 = 2;
-  KeyF3 = 3;
-  KeyF4 = 4;
-  KeyF5 = 5;
-  KeyF6 = 6;
-  KeyF7 = 7;
-  KeyF8 = 8;
-  KeyF9 = 9;
-  KeyTb = 20;
-  ShfTb = 21;
-  Alt_X = 22;
+  Escap = 27;
+  CsrLf = 75;
+  CsrUp = 72;
+  CsrRg = 77;
+  CsrDn = 80;
+  CsrHm = 55;
+  KeyTb = 9;
+  KeyF1 = 59;
+  KeyF2 = 60;
+  KeyF3 = 61;
+  KeyF4 = 62;
+  KeyF5 = 63;
+  KeyF6 = 64;
+  KeyF7 = 65;
+  KeyF8 = 66;
+  KeyF9 = 67;
+  ShfTb = 91;
+  Alt_X = 45;
 
 var
   AnsiVideo: Boolean = False;
@@ -67,7 +73,6 @@ var
   DosInput: Boolean = False;
   DosVideo: Boolean = False;
   ForceVideo: Boolean = False;
-  Escap: Word = 0;
   KbdRepeated: Boolean = False;
   LastInputDos: Boolean = False;
   rTime: Single = 0;
