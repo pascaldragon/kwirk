@@ -510,9 +510,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
     ActiveKwirk:=0; ChangeKwirk(Maze);
     repeat
       {repeat}
-      {$ifdef enable}
-        a:=KbdKeyDown;
-      {$endif}
+      a := False;//KbdKeyDown;
 
         if ShowMovingTime then
           begin
