@@ -184,7 +184,7 @@ Procedure PlayMazeFile;
       until (Room>nMazes) or (not bMadeIt and not bSkipIt and not bSkipBack);
       ClearHelpKey;
       end;
-  until TextKwirk or (Room=0) or (Room>nMazes) or (LastKey=KeyF3) or (LastKey=Alt_X);
+  until TextKwirk or (Room=0) or (Room>nMazes) or (LastKey=KeyF5{KeyF3}) or (LastKey=Alt_X);
   end;
 
 var T: LongInt;
@@ -245,7 +245,7 @@ repeat
     if not TextKwirk then
       if Room>nMazes then begin Room:=1; Inc(MazeNr); MazFN:='.' end;
     end;
-until (MazFN='') or (LastKey=KeyF3) or (LastKey=ALT_X) or bGivenMaze or TextKwirk;
+until (MazFN='') or (LastKey=KeyF5{KeyF3}) or (LastKey=ALT_X) or bGivenMaze or TextKwirk;
 {if not TextKwirk then{} ExitGem;
 Cfg.Done;
 if not TextKwirk then

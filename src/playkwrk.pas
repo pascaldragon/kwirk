@@ -604,7 +604,7 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
       bAllAim:=Maze.nKwirks<=0;
     until bAllAim or bBorder or (not TextKwirk and (LastKey=Escap)) or (LastKey=ord('Q')-Ord('@')) or
           (LastKey=KeyTb) or (LastKey=Ord('+')) or (LastKey=ShfTb) or (LastKey=Ord('-')) or
-          (LastKey=KeyF3) or (LastKey=Alt_X) or bRetryRoom or CheckTimeout(0);
+          (LastKey=KeyF5{KeyF3}) or (LastKey=Alt_X) or bRetryRoom or CheckTimeout(0);
   until not bRetryRoom;
   t:=round(rTime); if t<>t0 then begin writeTime1(t-RoomStartTime); writeTime2(t-LevelStartTime) end;
   PlayKwirk:=bBorder or bAllAim;
