@@ -190,7 +190,7 @@ end;
 
 function InitGem(const aPath: String): Boolean;
 begin
-  InitGraph(sConfig.Screen1, sConfig.Res1, '');
+  InitGraph(sConfig.Screen1, sConfig.Res1, '.');
   Result := GraphResult = grOk;
 end;
 
