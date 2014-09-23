@@ -134,7 +134,7 @@ end;
 
 procedure WaitTimerTick(aTime: Integer; aJump: Integer);
 begin
-
+  Sleep(aJump);
 end;
 
 function ReadTimerTick(aTime: Integer): Integer;
