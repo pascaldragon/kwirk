@@ -382,8 +382,8 @@ Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
     {$endif}
     end;
   y:=VgaY(y);
-  SetColor(c1); GraphUnit.OutTextXY(x+1,y+1,s);
-  SetColor(c2); GraphUnit.OutTextXY(x,y,s);
+  SetColor(CalcColor(c1)); GraphUnit.OutTextXY(x+1,y+1,s);
+  SetColor(CalcColor(c2)); GraphUnit.OutTextXY(x,y,s);
   end;
 
 Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
@@ -642,8 +642,8 @@ Procedure WriteMazeNr(n: integer);
     Write(' ');
     end
   else begin
-    SetColor(Yellow);
-    SetFillStyle(SolidFill,Black);
+    SetColor(CalcColor(Yellow));
+    SetFillStyle(SolidFill,CalcColor(Black));
     SetTextJustify(LeftText,TopText);
     SetTextStyle(TriplexFont,HorizDir,1);
     OutTextXYs(540,160,'Room',Black,Yellow);
@@ -704,7 +704,7 @@ Procedure WriteTime1(t: LongInt);
     Write('Zeit  ',s);
     end
   else begin
-    SetColor(Cyan);
+    SetColor(CalcColor(Cyan));
     SetTextJustify(LeftText,TopText);
     if DefaultSpeedFont then SetTextStyle(DefaultFont,HorizDir,1) else SetTextStyle(TriplexFont,HorizDir,1);
     OutTextXY(540,220,'Time');
@@ -725,7 +725,7 @@ Procedure WriteTime2(t: LongInt);
     Write('Gesamt',s);
     end
   else begin
-    SetColor(Cyan);
+    SetColor(CalcColor(Cyan));
     SetTextJustify(LeftText,TopText);
     if DefaultSpeedFont then SetTextStyle(DefaultFont,HorizDir,1) else SetTextStyle(TriplexFont,HorizDir,1);
     OutTextXY(540,270,'Total');
@@ -1167,7 +1167,7 @@ Procedure DrawField(var M: MazeType);
     Write(M.Name);
     end
   else begin
-    SetColor(Black);
+    SetColor(CalcColor(Black));
     SetTextJustify(CenterText,TopText);
     SetTextStyle(GothicFont,HorizDir,3);
     OutTextXYs((M.xs*ImgXsize) div 2 +MazeXoffs,MazeYoffs,M.Name,Black,DarkGray);
@@ -1199,7 +1199,7 @@ Procedure ShowHelp;
 
   Procedure ShowQMakeHelp;
     begin
-    SetTextStyle(TriplexFont,HorizDir,1); SetColor(Black);
+    SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
     OutTextXY(x,y+ 00,'Use the Mouse to design the Room.');
     OutTextXY(x,y+ 30,'Press P to Play.');
     OutTextXY(x,y+ 60,'Press F2 to save your changes.');
@@ -1225,7 +1225,7 @@ Procedure ShowHelp;
   HelpTitle;
   if QuestMakerFlag then ShowQMakeHelp
     else begin
-      SetTextStyle(TriplexFont,HorizDir,1); SetColor(Black);
+      SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'Use the CURSORKEYS to move the Kwirk.');
       OutTextXY(x,y+30,'Try to enter the staircase.');
       OutTextXY(x,y+60,'Move a box completely into the water-puddle');
@@ -1238,7 +1238,7 @@ Procedure ShowHelp;
 
       if LastKey<>Escap then begin
       SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
-      SetTextStyle(TriplexFont,HorizDir,1); SetColor(Black);
+      SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'If there are more than one Kwirk in a room,');
       OutTextXY(x,y+20,'use the ENTER key to switch your control to');
       OutTextXY(x,y+40,'the next Kwirk. You have to move all Kwirks');
@@ -1252,7 +1252,7 @@ Procedure ShowHelp;
 
       if LastKey<>Escap then begin
       SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
-      SetTextStyle(TriplexFont,HorizDir,1); SetColor(Black);
+      SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'To abort a quest use the ESC key while you');
       OutTextXY(x,y+20,'are playing. Then you will get back to the');
       OutTextXY(x,y+40,'first menue.');
@@ -1260,7 +1260,7 @@ Procedure ShowHelp;
 
       if False and (LastKey<>Escap) then begin
       SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
-      SetTextStyle(TriplexFont,HorizDir,1); SetColor(Black);
+      SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'If you think that this game is usable,');
       OutTextXY(x,y+20,'please send '+DMstr+' to:');
       OutTextXY(x+100,y+50,'J. A. Merten');
