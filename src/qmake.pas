@@ -298,14 +298,14 @@ Procedure MakeRoom(var M: MazeType; Room: integer);
     if c='P' then
       begin
       QMPlayKwirk(M,Room);
-      if LastKey<>KeyF5{KeyF3} then begin DrawMen(Men); SetImgMaze(M); DrawField(M) end;
+      if LastKey<>KeyF3 then begin DrawMen(Men); SetImgMaze(M); DrawField(M) end;
       end;
     if k=KeyF1 then begin ShowHelp; SetImgMaze(M); DrawField(M) end;
     if (k=KeyF2) or (k=KeyF4) then
       begin
-      if SaveMazes(MazFN) and (k=KeyF4) then LastKey:=KeyF5{KeyF3};
+      if SaveMazes(MazFN) and (k=KeyF4) then LastKey:=KeyF3;
       end;
-  until (LastKey=Escap) or (LastKey=KeyF5{KeyF3});
+  until (LastKey=Escap) or (LastKey=KeyF3);
   PopMouse
   end;
 
@@ -335,7 +335,7 @@ Procedure MakeQuest;
         end else Room:=0;
       end;
     if Room>0 then MakeRoom(Mazes[Room],Room);
-  until (Room=0) or (LastKey=KeyF5{KeyF3});
+  until (Room=0) or (LastKey=KeyF3);
   end;
 
 Procedure QuestMaker;
@@ -358,7 +358,7 @@ Procedure QuestMaker;
         if MazFN<>'.Maz' then MakeQuest;
         end
       else if LoadMazes(MazFN) then MakeQuest;
-  until LastKey=KeyF5{KeyF3};
+  until LastKey=KeyF3;
   {$ifdef enable}
   ExitGem;
   {$endif}
