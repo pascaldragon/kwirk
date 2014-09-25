@@ -107,6 +107,7 @@ var
 
 var
   sConfig: TGraphConfig = ( Screen1: Detect; Res1: Default );
+  iConfig: TGraphConfig absolute sConfig;
 
 implementation
 

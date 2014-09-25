@@ -1215,9 +1215,7 @@ Procedure ShowHelp;
   begin
   if GetMaxX<320 then exit;
   IncMouseHide;
-  {$ifdef enable}
   if iConfig.Screen1=HercMono then begin xp:=65; x:=30 end else begin xp:=120; x:=85 end;
-  {$endif}
   yp:=110; y:=160;
   if not QuestMakerFlag then ClearHelpKey;
   SetFillStyle(SolidFill,LightGray);
