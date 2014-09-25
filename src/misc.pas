@@ -1229,7 +1229,7 @@ Procedure ShowHelp;
       WaitKey;
 
       if LastKey<>Escap then begin
-      SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
+      SetFillStyle(SolidFill,CalcColor(DarkGray)); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
       SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'If there are more than one Kwirk in a room,');
       OutTextXY(x,y+20,'use the ENTER key to switch your control to');
@@ -1243,7 +1243,7 @@ Procedure ShowHelp;
       WaitKey;
 
       if LastKey<>Escap then begin
-      SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
+      SetFillStyle(SolidFill,CalcColor(DarkGray)); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
       SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'To abort a quest use the ESC key while you');
       OutTextXY(x,y+20,'are playing. Then you will get back to the');
@@ -1251,7 +1251,7 @@ Procedure ShowHelp;
       WaitKey;
 
       if False and (LastKey<>Escap) then begin
-      SetFillStyle(SolidFill,DarkGray); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
+      SetFillStyle(SolidFill,CalcColor(DarkGray)); Bar(x+xo,y-tt+10,x+xo+xs,y+yo+ys-tt);
       SetTextStyle(TriplexFont,HorizDir,1); SetColor(CalcColor(Black));
       OutTextXY(x,y+00,'If you think that this game is usable,');
       OutTextXY(x,y+20,'please send '+DMstr+' to:');
