@@ -9,16 +9,24 @@ unit JME_Demo;
 
 interface
 
-uses Crt, Misc, DefBase;
+uses CrtUnit, Misc, DefBase;
 
 Procedure ShowJME;
 
 implementation
 
+uses
+  Compat;
+
 Procedure SetColor(tc,bc: integer);
   begin
+  {$if declared(LastMode)}
   if LastMode<>7 then begin TextColor(tc); TextBackground(bc); exit end;
   if tc>=Yellow then HighVideo else LowVideo;
+  {$else}
+  TextColor(tc);
+  TextBackground(bc);
+  {$endif}
   end;
 
 Procedure WriteDienst(x,y,tc,bc: integer);
@@ -97,7 +105,9 @@ Procedure WriteLoading(x,y,tc,bc: integer);
 
 Procedure ShowJME;
   begin
+  {$if declared(LastMode)}
   TextModeAtProgrammStart:=LastMode;
+  {$endif}
   {$ifdef enable}
   if VWdt<80 then TextMode(Co80);
   {$endif}
@@ -112,7 +122,7 @@ Procedure ShowJME;
   GotoXY(1,25);
   if KwirkReadKey=0 then;
   WriteLoading(6,24,LightMagenta,Black);
-  GotoXY(1,25); NormVideo;
+  GotoXY(1,25); {$if declared(NormVideo)}NormVideo;{$endif}
   end;
 
 end.

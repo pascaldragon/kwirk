@@ -8,7 +8,10 @@
 
 {$ifdef windows}
   {$define GraphUnit:=Graph}
+  {$define CrtUnit:=Crt}
 {$else}
   {$define GraphUnit:=PtcGraph}
+  {$define CrtUnit:=PtcCrt}
+  {$define DefineColors}
 {$endif}
 

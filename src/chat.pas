@@ -4,9 +4,11 @@
 
 Unit Chat;
 
+{$include kwirkdefs.inc}
+
 interface
 
-Uses Crt;
+Uses CrtUnit;
 
 Procedure DoChat(Key: Word);
 
@@ -189,7 +191,7 @@ Procedure TChatWin.ShowCursor;
   GetMaxCursorPos(x,y);
   Dec(y,nOfs);
   GotoXY(x+PosX-1,y+PosY-1);
-  TextAttr:=Color or Blink;
+  TextAttr:=Color{$if declared(Blink)} or Blink{$endif};
   Write('_');
   end;
 

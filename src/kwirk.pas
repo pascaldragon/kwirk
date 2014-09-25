@@ -10,7 +10,7 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 {M 8000,0,655360}
 { $D-,L-}
 
-uses Crt, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
+uses CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
      {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, QMake, Misc, PlayKwrk, JME_Demo, {Timer, }KW_Snd, Compat;
 
 Procedure WriteSyntax(Const Fehler: String);
@@ -250,15 +250,21 @@ until (MazFN='') or (LastKey=KeyF5{KeyF3}) or (LastKey=ALT_X) or bGivenMaze or T
 Cfg.Done;
 if not TextKwirk then
   begin
+  {$if declared(TextMode)}
   if (TextModeAtProgrammStart>=0) then TextMode(TextModeAtProgrammStart);
+  {$endif}
   end
 else begin
+  {$if declared(TextMode)}
   NormVideo;
+  {$endif}
   Write(' ');
   ClrScr;
   end;
 GotoXY(1,1); TextColor(White);
 writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
+{$if declared(TextMode)}
 NormVideo;
+{$endif}
 writeln;
 end.

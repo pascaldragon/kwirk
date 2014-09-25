@@ -10,7 +10,7 @@ unit Misc; { for " The Quest of Kwirk's Castle " }
 
 interface
 
-uses Dos, Crt,{MyCrt,} GraphUnit, Compat,
+uses Dos, CrtUnit,{MyCrt,} GraphUnit, Compat,
      {GemBase, GemInit, Pum,} Mouse, //KbdRep,
      {vStrSubs, Num2Str, StdSubs,} DefBase{, Timer};
 
@@ -70,7 +70,9 @@ implementation
 
 Procedure InitError(s: String; Title,Help: Boolean);
   begin
+  {$if declared(TextMode)}
   if TextModeAtProgrammStart>=0 then TextMode(TextModeAtProgrammStart);
+  {$endif}
   if not Title then begin TextColor(LightGray); TextBackground(Black) end;
   if Title then
     begin

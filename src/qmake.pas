@@ -15,7 +15,7 @@ Procedure QuestMaker;
 
 implementation
 
-uses Crt, GraphUnit, Compat,{GemInit, GrInput, Pum,} Mouse, {StdSubs, vStrSubs, }DefBase, Misc, PlayKwrk;
+uses CrtUnit, GraphUnit, Compat,{GemInit, GrInput, Pum,} Mouse, {StdSubs, vStrSubs, }DefBase, Misc, PlayKwrk;
 
 Procedure GetRoomName(var s: String);
   begin
@@ -362,7 +362,9 @@ Procedure QuestMaker;
   {$ifdef enable}
   ExitGem;
   {$endif}
+  {$ifdef declared(TextMode)}
   if TextModeAtProgrammStart>=0 then TextMode(TextModeAtProgrammStart);
+  {$endif}
   GotoXY(1,1); TextColor(White);
   writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
   TextColor(LightGray);

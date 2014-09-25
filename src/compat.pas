@@ -10,7 +10,7 @@ unit Compat;
 interface
 
 uses
-  GraphUnit,
+  GraphUnit, CrtUnit,
   Config;
 
 function Int2StrL(aValue, aLength: Integer): String; inline;
@@ -71,6 +71,29 @@ const
   ShfTb = 91;
   Alt_X = 45;
 
+{$ifdef DefineColors}
+const
+{ Foreground and background color constants }
+  Black         = 0;
+  Blue          = 1;
+  Green         = 2;
+  Cyan          = 3;
+  Red           = 4;
+  Magenta       = 5;
+  Brown         = 6;
+  LightGray     = 7;
+
+{ Foreground color constants }
+  DarkGray      = 8;
+  LightBlue     = 9;
+  LightGreen    = 10;
+  LightCyan     = 11;
+  LightRed      = 12;
+  LightMagenta  = 13;
+  Yellow        = 14;
+  White         = 15;
+{$endif}
+
 var
   AnsiVideo: Boolean = False;
   CopyVideo: Boolean = False;
@@ -88,7 +111,7 @@ var
 implementation
 
 uses
-  sysutils, crt;
+  sysutils;
 
 function Int2StrL(aValue, aLength: Integer): String;
 begin
