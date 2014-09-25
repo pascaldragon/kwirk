@@ -345,9 +345,7 @@ Procedure QuestMaker;
     WriteQuestMakerTitle;
     WriteLevel('1991 by Joe M.   ');
     MazFN:=MazeMenue(MazFN);
-    {$ifdef enable}
     if MazFN='' then begin ExitGem; Halt(0) end;
-    {$endif}
     if MazFN='.Maz'
       then begin
         nMazes:=0;
@@ -359,9 +357,7 @@ Procedure QuestMaker;
         end
       else if LoadMazes(MazFN) then MakeQuest;
   until LastKey=KeyF3;
-  {$ifdef enable}
   ExitGem;
-  {$endif}
   {$ifdef declared(TextMode)}
   if TextModeAtProgrammStart>=0 then TextMode(TextModeAtProgrammStart);
   {$endif}

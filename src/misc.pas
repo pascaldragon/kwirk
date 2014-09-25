@@ -336,9 +336,7 @@ Procedure ClrOutTextXY(x,y: LongInt; s: String);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
-    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<766) then Dec(x,40);
-    {$endif}
     end;
   y:=VgaY(y);
   tw:=TextWidth(s); th:=TextHeight(s);
@@ -366,9 +364,7 @@ Procedure OutTextXY(x,y: LongInt; s: String);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
-    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<765) then Dec(x,40);
-    {$endif}
     end;
   GraphUnit.OutTextXY(x,VgaY(y),s);
   end;
@@ -379,9 +375,7 @@ Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
     begin
     x:=GetMaxX-(((639-x)*(GetMaxX+1)) div 640);
     if (GetMaxX<320) and (x<315) then Dec(x,20);
-    {$ifdef enable}
     if (iConfig.Screen1=HercMono) and (x<765) then Dec(x,40);
-    {$endif}
     end;
   y:=VgaY(y);
   SetColor(CalcColor(c1)); GraphUnit.OutTextXY(x+1,y+1,s);
@@ -397,9 +391,7 @@ Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
   begin
   if Lines=0 then exit;
   SetTextJustify(LeftText,TopText);
-  {$ifdef enable}
   if DefaultSpeedFont then SetTextDefault else SetTextStyle(TriplexFont,HorizDir,1);
-  {$endif}
   GetTextSettings(ti);
   if ti.Font<>DefaultFont then
     begin
