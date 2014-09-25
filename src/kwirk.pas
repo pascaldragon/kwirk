@@ -11,7 +11,8 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 { $D-,L-}
 
 uses CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
-     {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, QMake, Misc, PlayKwrk, JME_Demo, {Timer, }KW_Snd, Compat;
+     {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, {QMake,} Misc, PlayKwrk, JME_Demo,
+     KW_Snd, Compat, Maze;
 
 Procedure WriteSyntax(Const Fehler: String);
   Function Bool2OnOff(a: Boolean): String;
@@ -216,7 +217,7 @@ Cfg.Init;
 if (UserName<>'') and (Pos('.',UserName)=0) then Insert('.Sav',UserName,255);
 Cfg.SetFilename(UserName);
 if UserName<>'' then Cfg.SetAktGroupName('Kwirk''s Castle SavedGame');
-if QuestMakerFlag and not TextKwirk then QuestMaker;
+//if QuestMakerFlag and not TextKwirk then QuestMaker;
 if not TextKwirk then SetTextStyle(GothicFont,HorizDir,2);
 
 StartTimer(T);
