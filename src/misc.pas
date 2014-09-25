@@ -1187,7 +1187,7 @@ Procedure ShowHelp;
       y : integer;
   Procedure HelpTitle;
     begin
-    SetFillStyle(SolidFill,DarkGray);  Bar(x+xo,y+yo,x+xo+xs,y+yo+ys);
+    SetFillStyle(SolidFill,CalcColor(DarkGray));  Bar(x+xo,y+yo,x+xo+xs,y+yo+ys);
     SetTextJustify(LeftText,BottomText);
     SetTextStyle(GothicFont,HorizDir,2);
     OutTextXYs(xp,yp,'The',Black,LightGray);
@@ -1218,7 +1218,7 @@ Procedure ShowHelp;
   if iConfig.Screen1=HercMono then begin xp:=65; x:=30 end else begin xp:=120; x:=85 end;
   yp:=110; y:=160;
   if not QuestMakerFlag then ClearHelpKey;
-  SetFillStyle(SolidFill,LightGray);
+  SetFillStyle(SolidFill,CalcColor(LightGray));
   if GetMaxColor<4 then SetFillStyle(SolidFill,GetMaxColor-1);
   Bar(x+xo+20,y+yo+20,x+xo+xs+20,y+yo+ys+20);
 
