@@ -12,7 +12,7 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 
 uses CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
      {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, {QMake,} Misc, PlayKwrk, JME_Demo,
-     KW_Snd, Compat, Maze;
+     KW_Snd, Compat;
 
 Procedure WriteSyntax(Const Fehler: String);
   Function Bool2OnOff(a: Boolean): String;
