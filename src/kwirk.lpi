@@ -6,7 +6,6 @@
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasTitleStatement Value="False"/>
-        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
@@ -31,10 +30,11 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="3">
+    <Units Count="8">
       <Unit0>
         <Filename Value="kwirk.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="Kwirk"/>
       </Unit0>
       <Unit1>
         <Filename Value="compat.pas"/>
@@ -46,6 +46,31 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Config"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="renderer.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Renderer"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="graphutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GraphUtils"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="crtutils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CrtUtils"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="maze.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Maze"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="utils.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Utils"/>
+      </Unit7>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

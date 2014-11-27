@@ -9,7 +9,7 @@ unit JME_Demo;
 
 interface
 
-uses CrtUnit, Misc, DefBase;
+uses CrtUnit;
 
 Procedure ShowJME;
 
