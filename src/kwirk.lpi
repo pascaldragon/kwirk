@@ -30,7 +30,7 @@
         <FormatVersion Value="1"/>
       </local>
     </RunParams>
-    <Units Count="8">
+    <Units Count="10">
       <Unit0>
         <Filename Value="kwirk.pas"/>
         <IsPartOfProject Value="True"/>
@@ -71,6 +71,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="Utils"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="kwirks.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Kwirks"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="engine.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Engine"/>
+      </Unit9>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

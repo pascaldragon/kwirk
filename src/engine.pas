@@ -2,7 +2,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. *)
 
-unit PlayKwrk; { for " The Quest of Kwirk's Castle " }
+unit Engine; { for " The Quest of Kwirk's Castle " }
 interface
 
 {$I kwirkdefs.inc}
@@ -83,7 +83,8 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
           end;
         if KwirkKeyPressed then
           begin
-          c:=KwirkReadKey
+          c:=KwirkReadKey;
+          writeln(c);
           end
         else begin
           if QuickMoving

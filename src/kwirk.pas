@@ -11,7 +11,7 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 { $D-,L-}
 
 uses CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
-     {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, {QMake,} PlayKwrk, JME_Demo,
+     {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, {QMake,} Engine, JME_Demo,
      KW_Snd, Compat, Renderer, GraphUtils, CrtUtils, Maze, Utils;
 
 Procedure WriteSyntax(Const Fehler: String);
