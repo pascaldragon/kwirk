@@ -8,7 +8,7 @@ unit CrtUtils;
 
 interface
 
-Procedure GotoFldXY(x,y: Integer);
+Procedure GotoFldXY(x,y: Int16);
 
 {.$I KbdCodes.Pas}
 Function KwirkReadKey: Word;
@@ -25,7 +25,7 @@ implementation
 uses
   CrtUnit, DefBase, Compat, Utils;
 
-Procedure GotoFldXY(x,y: Integer);
+Procedure GotoFldXY(x, y: Int16);
   begin
   GotoXY((x-1)*3+1+MazeXoffs,y+MazeYoffs);
   end;

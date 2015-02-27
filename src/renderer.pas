@@ -12,28 +12,28 @@ uses
   Dos,
   DefBase;
 
-Procedure DrawImage(ix,iy: integer; Img: Pointer; dx,dy: integer; PutMode: integer);
-Procedure DrawMazeImage(var Maze: MazeType; ix,iy: integer);
+Procedure DrawImage(ix,iy: Int16; Img: Pointer; dx,dy: Int16; PutMode: Int16);
+Procedure DrawMazeImage(var Maze: MazeType; ix,iy: Int16);
 Procedure DrawField(var M: MazeType);
-Function RoomMenue(Room0: integer): integer;
+Function RoomMenue(Room0: Int16): Int16;
 Procedure WriteHelpKey;
 Procedure ClearHelpKey;
 Procedure WriteQuestMakerTitle;
 Procedure WriteTitle;
 Procedure WriteLevel(s: String);
-Procedure WriteMazeNr(n: integer);
-Procedure WriteAttempt(t: integer);
+Procedure WriteMazeNr(n: Int16);
+Procedure WriteAttempt(t: Int16);
 Procedure WriteTime1(t: LongInt);
 Procedure WriteTime2(t: LongInt);
 Procedure ShowHelp;
 Function LoadImages(FN: PathStr): Boolean;
 Function MazeMenue(FN0: PathStr): PathStr;
 function SupportsMazeSelection: Boolean;
-Function Char2ImgNr(c: Char): integer;
+Function Char2ImgNr(c: Char): Int16;
 Function Char2ImgPtr(c: Char): Pointer;
-Procedure SetMazeImage(var Maze: MazeType; x,y: integer);
+Procedure SetMazeImage(var Maze: MazeType; x,y: Int16);
 Procedure SetImgMaze(var Maze: MazeType);
-Procedure DrawWater(x,y: Integer; Mode: Integer);
+Procedure DrawWater(x,y: Int16; Mode: Int16);
 procedure RendererDone;
 procedure RendererInit;
 
@@ -43,8 +43,8 @@ uses
   CrtUnit, GraphUnit,
   CrtUtils, GraphUtils, Compat, Maze, Utils;
 
-Procedure DrawImage(ix,iy: integer; Img: Pointer; dx,dy: integer; PutMode: integer);
-  var x,y,i: integer;
+Procedure DrawImage(ix,iy: Int16; Img: Pointer; dx,dy: Int16; PutMode: Int16);
+  var x,y,i: Int16;
   begin
   if TextKwirk then
     begin
@@ -72,9 +72,9 @@ Procedure DrawImage(ix,iy: integer; Img: Pointer; dx,dy: integer; PutMode: integ
     end;
   end;
 
-Procedure DrawMazeImage(var Maze: MazeType; ix,iy: integer);
-  var x,y,i: integer;
-    PutMode: integer;
+Procedure DrawMazeImage(var Maze: MazeType; ix,iy: Int16);
+  var x,y,i: Int16;
+    PutMode: Int16;
   begin
   with Maze do if (ix<1) or (ix>xs) or (iy<1) or (iy>ys) then exit;
   if TextKwirk then
@@ -139,9 +139,9 @@ Procedure DrawMazeImage(var Maze: MazeType; ix,iy: integer);
   end;
 
 Procedure DrawField(var M: MazeType);
-  var x,y: integer;
-    xs,ys: integer;
-        i: integer;
+  var x,y: Int16;
+    xs,ys: Int16;
+        i: Int16;
   begin
   IncMouseHide;
   {ClearDevice;}
@@ -175,7 +175,7 @@ Procedure DrawField(var M: MazeType);
   DecMouseHide
   end;
 
-Procedure DrawWater(x,y: Integer; Mode: Integer);
+Procedure DrawWater(x,y: Int16; Mode: Int16);
   begin
   if TextKwirk then
     begin
@@ -224,9 +224,9 @@ begin
 end;
 
 
-Const  RoomPumOffs: integer = 1;
-Function RoomMenue(Room0: integer): integer;
-  var   i,n: integer;
+Const  RoomPumOffs: Int16 = 1;
+Function RoomMenue(Room0: Int16): Int16;
+  var   i,n: Int16;
           d: Array[0..MaxMazes] of MazeNameStr;
   begin
   d[0]:=QuestName;
@@ -353,7 +353,7 @@ Procedure WriteLevel(s: String);
   LastLevel:=s;
   end;
 
-Procedure WriteMazeNr(n: integer);
+Procedure WriteMazeNr(n: Int16);
   begin
   if TextKwirk then
     begin
@@ -376,7 +376,7 @@ Procedure WriteMazeNr(n: integer);
     end;
   end;
 
-Procedure WriteAttempt(t: integer);
+Procedure WriteAttempt(t: Int16);
   begin
   if TextKwirk then
     begin
@@ -461,10 +461,10 @@ Procedure ShowHelp;
   Const xs=440; ys=340;  { Ges. Box }
         xo=-15; yo=-90;  { Abstand v. Box zum Text     }
         tt=50;           { Y-Abstand v. Titel zum Text }
-  var xp: integer;       { f. Titel }
-      yp: integer;
-      x : integer;       { f. Text  }
-      y : integer;
+  var xp: Int16;       { f. Titel }
+      yp: Int16;
+      x : Int16;       { f. Text  }
+      y : Int16;
   Procedure HelpTitle;
     begin
     SetFillStyle(SolidFill,CalcColor(DarkGray));  Bar(x+xo,y+yo,x+xo+xs,y+yo+ys);
@@ -558,10 +558,10 @@ Procedure ShowHelp;
   DecMouseHide;
   end;
 
-Procedure GetImg(var F: File; i: integer);
+Procedure GetImg(var F: File; i: Int16);
   var x1,y1,
       x2,y2,
-       s,s1: integer;
+       s,s1: Int16;
   begin
   x1:=1;
   y1:=1;
@@ -574,7 +574,7 @@ Procedure GetImg(var F: File; i: integer);
 
 Function LoadImages(FN: PathStr): Boolean;
   var F: File;
-      i: integer;
+      i: Int16;
     x,y: {$ifdef fpc}longword{$else}word{$endif};
   begin
   InOutRes:=0;
@@ -606,9 +606,9 @@ Const MaxMazeMenEntrys = 100;
 Type  MazeMenEntryType = record FN,Title: PathStr end;
         MazeMenArrType = Array[0..MaxMazeMenEntrys+1] of MazeMenEntryType;
 
-Procedure MazeMenueSort(var a: MazeMenArrType; n: integer);
-  procedure QuickSort(L, R: Integer);
-    var  I,J: Integer;
+Procedure MazeMenueSort(var a: MazeMenArrType; n: Int16);
+  procedure QuickSort(L, R: Int16);
+    var  I,J: Int16;
          X,Y: MazeMenEntryType;
     begin
     I:=L;
@@ -633,11 +633,11 @@ Procedure MazeMenueSort(var a: MazeMenArrType; n: integer);
   if 1<n then QuickSort(1,n)
   end;
 
-Const  MazePumOffs: integer = 1;
+Const  MazePumOffs: Int16 = 1;
 Function MazeMenue(FN0: PathStr): PathStr;
   Type EntryType = record FN,Title: PathStr end;
   var     d: MazeMenArrType;
-      i,j,n: integer;
+      i,j,n: Int16;
          sr: SearchRec;
           T: Text;
           s: String;
@@ -740,8 +740,8 @@ begin
   SupportsMazeSelection := not TextKwirk;
 end;
 
-Function Char2ImgNr(c: Char): integer;
-  var f: integer;
+Function Char2ImgNr(c: Char): Int16;
+  var f: Int16;
   begin
   case c of
     'W': f:=WallFld;   { Wand   }
@@ -794,24 +794,24 @@ Function Char2ImgNr(c: Char): integer;
   end;
 
 Function Char2ImgPtr(c: Char): Pointer;
-  var f: integer;
+  var f: Int16;
   begin
   f:=Char2ImgNr(c);
   if f=0 then Char2ImgPtr:=Nil else Char2ImgPtr:=Img[f];
   end;
 
-Procedure SetMazeImage(var Maze: MazeType; x,y: integer);
-  var   i,l,m,f: integer;
+Procedure SetMazeImage(var Maze: MazeType; x,y: Int16);
+  var   i,l,m,f: Int16;
               c: char;
              cs: CharSet;
     re,ob,li,un: Boolean;
     ro,lo,ru,lu: Boolean;
-  Procedure AddLine(Ln: integer);
+  Procedure AddLine(Ln: Int16);
     begin if l<=MaxLines then begin if f=WallFld then ImgMaze[y,x].Line1[l]:=Ln else ImgMaze[y,x].Line2[l]:=Ln; Inc(l) end end;
-  Procedure AddMask(Mk: integer);
+  Procedure AddMask(Mk: Int16);
     begin if m<=MaxMasks then begin if f=WallFld then ImgMaze[y,x].Mask1[m]:=Mk else ImgMaze[y,x].Mask2[m]:=Mk; Inc(m) end end;
-  Function CheckWallWater(y,x: integer): integer;
-    var i: integer;
+  Function CheckWallWater(y,x: Int16): Int16;
+    var i: Int16;
       a,b: Boolean;
     begin
     CheckWallWater:=0;
@@ -888,7 +888,7 @@ Procedure SetMazeImage(var Maze: MazeType; x,y: integer);
   end;
 
 Procedure SetImgMaze(var Maze: MazeType);
-  var x,y: integer;
+  var x,y: Int16;
   begin
   for x:=1 to Maze.xs do
     for y:=1 to Maze.ys do

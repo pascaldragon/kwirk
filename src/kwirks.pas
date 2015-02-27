@@ -15,12 +15,12 @@ Procedure DrawKwirk;
 Procedure JumpKwirk;
 Procedure ChangeKwirk(var Maze: MazeType);
 Procedure SetKwirkDir(c: Char);
-Procedure MoveKwirk(var Maze: MazeType; dx,dy: integer);
+Procedure MoveKwirk(var Maze: MazeType; dx,dy: Int16);
 
-var ActiveKwirk: integer;
+var ActiveKwirk: Int16;
        //KwirkDir: Char;
          KwirkX,
-         KwirkY: integer;
+         KwirkY: Int16;
         //MoveImg: KwirkMoveImgType;
     KwirkStands: Boolean;
 
@@ -29,10 +29,10 @@ implementation
 uses
   CrtUnit, GraphUnit, CrtUtils, Renderer, Compat, Maze, KW_Snd;
 
-var ///ActiveKwirk: integer;
+var ///ActiveKwirk: Int16;
        KwirkDir: Char;
          //KwirkX,
-         //KwirkY: integer;
+         //KwirkY: Int16;
         MoveImg: KwirkMoveImgType;
     //KwirkStands: Boolean;
 
@@ -56,7 +56,7 @@ Procedure DrawKwirk;
   end;
 
 Procedure JumpKwirk;
-  var i,y,y0: integer;
+  var i,y,y0: Int16;
            T: LongInt;
   begin
   if not KwirkStands then DrawKwirk;
@@ -76,7 +76,7 @@ Procedure JumpKwirk;
   end;
 
 Procedure ChangeKwirk(var Maze: MazeType);
-  var x,y: integer;
+  var x,y: Int16;
   begin
   if ActiveKwirk>0 then
     begin
@@ -122,9 +122,9 @@ Procedure SetKwirkDir(c: Char);
   end;
 
 Procedure MoveKwirk(var Maze: MazeType; dx,dy: integer);
-  var i,n,j,j0,s: integer;
-     x0,y0,x1,y1: integer;
-         PutMode: integer;
+  var i,n,j,j0,s: Int16;
+     x0,y0,x1,y1: Int16;
+         PutMode: Int16;
             Bump: Boolean;
       XorPutMode: Boolean;
      MoveBoxFlag,
@@ -134,15 +134,15 @@ Procedure MoveKwirk(var Maze: MazeType; dx,dy: integer);
          DW1,DW2,
          DW3,DW4: Boolean;
               m1: MazeType;
-       Xneu,Yneu: integer;
+       Xneu,Yneu: Int16;
      DoorX,DoorY,
      BoxX1,BoxY1,
-     BoxX2,BoxY2: integer;
+     BoxX2,BoxY2: Int16;
                f: Char;
       DelayTimer: LongInt;
 
-  Procedure PutKwirk(a,i: integer; dx,dy: integer; PutMode: integer);
-    var x,y,m: integer;
+  Procedure PutKwirk(a,i: Int16; dx,dy: Int16; PutMode: Int16);
+    var x,y,m: Int16;
     begin
     DrawImage(KwirkX,KwirkY,Img[MoveImg.Img[i]],dx,dy,PutMode);
     if MoveBoxFlag then

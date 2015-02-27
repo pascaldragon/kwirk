@@ -33,17 +33,17 @@ const       nImages = 112;
            MazFn: PathStr = ''; {'GoingUp1.Maz';}
        QuestName: String  = '';
       KwirkSpeed: Real    = 0.2; { von Feld zu Feld in Sekunden }
-     KwirkXSpeed: integer = 10;
-     KwirkYSpeed: integer = 10;
-       JumpSpeed: integer = 60;
-      WaterSpeed: integer = 300;
-       JoeMSpeed: integer = 600;
-  KwirkBumpSteps: integer = 6;
-     KwirkXsteps: integer = 9;
-     KwirkYsteps: integer = 9;
-        ImgXsize: integer = 27;
-        ImgYsize: integer = 27;
-          nMazes: integer = 0;
+     KwirkXSpeed: Int16 = 10;
+     KwirkYSpeed: Int16 = 10;
+       JumpSpeed: Int16 = 60;
+      WaterSpeed: Int16 = 300;
+       JoeMSpeed: Int16 = 600;
+  KwirkBumpSteps: Int16 = 6;
+     KwirkXsteps: Int16 = 9;
+     KwirkYsteps: Int16 = 9;
+        ImgXsize: Int16 = 27;
+        ImgYsize: Int16 = 27;
+          nMazes: Int16 = 0;
 {DefaultSpeedFont: Boolean = True;  (*{}
 DefaultSpeedFont: Boolean = False; (**)
      WaterToWall: Boolean = True;  (*{}
@@ -57,12 +57,12 @@ DefaultSpeedFont: Boolean = False; (**)
   QuestMakerFlag: Boolean = False; (*{}
   QuestMakerFlag: Boolean = True;  (**)
   ShowMovingTime: Boolean = False;
-       MazeXoffs: integer = 0;
-       MazeYoffs: integer = 0;
-        MenXoffs: integer = 0;
-        MenYoffs: integer = 0;
+       MazeXoffs: Int16 = 0;
+       MazeYoffs: Int16 = 0;
+        MenXoffs: Int16 = 0;
+        MenYoffs: Int16 = 0;
        TextKwirk: Boolean = False;
-         ComPort: Integer = 0;
+         ComPort: Int16 = 0;
         UserName: String  = '';
          TimeOut: Word    = 0;
          MaxTime: Word    = 0;
@@ -70,16 +70,16 @@ DefaultSpeedFont: Boolean = False; (**)
 var          Cfg: TConfig;
 
 Const ParamHelp: Boolean = False;
-Const TextModeAtProgrammStart: integer = -1;
+Const TextModeAtProgrammStart: Int16 = -1;
 
 Type   CharSet = Set of Char;
 {       ref_Img = ^ImgType;                                                }
-{       ImgType = record xs,ys: integer; Buf: Array[1..65531] of Byte end; }
-  KwirkPosType = Array[1..MaxKwirksPerMaze] of integer;
+{       ImgType = record xs,ys: Int16; Buf: Array[1..65531] of Byte end; }
+  KwirkPosType = Array[1..MaxKwirksPerMaze] of Int16;
    MazeNameStr = String[MaxMazeNameLen];
       MazeType = Record Name: MazeNameStr;
-                       xs,ys: integer;
-                     nKwirks: integer;
+                       xs,ys: Int16;
+                     nKwirks: Int16;
                       KwirkX,
                       KwirkY: KwirkPosType;
                         Jump: Array[1..MaxKwirksPerMaze] of Boolean;
@@ -102,8 +102,8 @@ Type   CharSet = Set of Char;
                   end;
    ImgMazeType = Array[1..MaxMazeYsize,1..MaxMazeXsize] of CellType;
 
-   KwirkMoveImgType = record nSteps: integer;
-                                Img: Array[0..MaxKwirkMoveSteps] of integer;
+   KwirkMoveImgType = record nSteps: Int16;
+                                Img: Array[0..MaxKwirkMoveSteps] of Int16;
                         end;
 
 { I Level123.Pas}
@@ -113,7 +113,7 @@ Type   CharSet = Set of Char;
 Type  ImgType = Array[1..MaxImgMemSize] of Byte;
       ref_Img = ^ImgType;
 
-const Room: integer = 1;
+const Room: Int16 = 1;
 var    Img: Array[1..nImages] of ref_Img;
    ImgMaze: ImgMazeType;
      Mazes: MazesType;

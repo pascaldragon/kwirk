@@ -9,9 +9,9 @@ unit GraphUtils;
 interface
 
 Procedure ClrOutTextXY(x,y: LongInt; s: String);
-Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
+Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: Int16);
 Procedure OutTextXY(x,y: LongInt; s: String);
-Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
+Procedure XPum(var a; Size: Word; Lines,OneTime:Int16; var y,Offset: Int16);
 Procedure SetTextStyle(Font,Direction,CharSize: Word);
 
 implementation
@@ -21,12 +21,12 @@ uses
 
 Function VgaX(x: LongInt): LongInt; begin VgaX:=(x*(GetMaxX+1)) div 640 end;
 Function VgaY(y: LongInt): LongInt; begin VgaY:=(y*(GetMaxY+1)) div 480 end;
-Procedure Bar(x1,y1,x2,y2: integer);
+Procedure Bar(x1,y1,x2,y2: Int16);
   begin GraphUnit.Bar(VgaX(x1),VgaY(y1),VgaX(x2),VgaY(y2)) end;
 
 
-Procedure SetTextStyle(Font,Direction,CharSize: Word);
-  var m,d: integer;
+Procedure SetTextStyle(Font, Direction, CharSize: Word);
+  var m,d: Int16;
   begin
   SetUserCharSize(CharSize,1,CharSize,1);
   SetUserCharSize(1,2,1,4);
@@ -41,7 +41,7 @@ Procedure SetTextStyle(Font,Direction,CharSize: Word);
   GraphUnit.SetTextStyle(Font,Direction,0);
   end;
 
-Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
+Procedure OutTextXYs(x, y: LongInt; s: String; c2, c1: Int16);
   begin
   if x>500 then
     begin
@@ -54,10 +54,10 @@ Procedure OutTextXYs(x,y: LongInt; s: String; c2,c1: integer);
   SetColor(CalcColor(c2)); GraphUnit.OutTextXY(x,y,s);
   end;
 
-Procedure ClrOutTextXY(x,y: LongInt; s: String);
+Procedure ClrOutTextXY(x, y: LongInt; s: String);
   var  ti: TextSettingsType;
-    tw,th: integer;
-        i: integer;
+    tw,th: Int16;
+        i: Int16;
   begin
   if x>500 then
     begin
@@ -85,7 +85,7 @@ Procedure ClrOutTextXY(x,y: LongInt; s: String);
             x+tw+4*ord(ti.Font<>DefaultFont),y+th+5*ord(ti.Font<>DefaultFont));
   end;
 
-Procedure OutTextXY(x,y: LongInt; s: String);
+Procedure OutTextXY(x, y: LongInt; s: String);
   begin
   if x>500 then
     begin
@@ -96,12 +96,13 @@ Procedure OutTextXY(x,y: LongInt; s: String);
   GraphUnit.OutTextXY(x,VgaY(y),s);
   end;
 
-Procedure XPum(var a; Size: Word; Lines,OneTime:integer; var y,Offset: integer);
+Procedure XPum(var a; Size: Word; Lines, OneTime: Int16; var y,
+  Offset: Int16);
   Type refStr = ^String;
   var    ti: TextSettingsType;
-          i: integer;
+          i: Int16;
          sp: refStr;
-    w,w1,l1: integer;
+    w,w1,l1: Int16;
   begin
   if Lines=0 then exit;
   SetTextJustify(LeftText,TopText);

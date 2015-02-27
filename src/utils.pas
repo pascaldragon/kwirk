@@ -81,7 +81,7 @@ Procedure Init2;
 
 Procedure Init3;
   var xasp,yasp: word;
-      MaxX,MaxY: integer;
+      MaxX,MaxY: Int16;
             i,j: LongInt;
           t0,t1: Real;
   begin

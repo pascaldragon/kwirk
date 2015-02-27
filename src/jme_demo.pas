@@ -18,7 +18,7 @@ implementation
 uses
   Compat;
 
-Procedure SetColor(tc,bc: integer);
+Procedure SetColor(tc,bc: Int16);
   begin
   {$if declared(LastMode)}
   if LastMode<>7 then begin TextColor(tc); TextBackground(bc); exit end;
@@ -29,7 +29,7 @@ Procedure SetColor(tc,bc: integer);
   {$endif}
   end;
 
-Procedure WriteDienst(x,y,tc,bc: integer);
+Procedure WriteDienst(x,y,tc,bc: Int16);
   begin
   SetColor(tc,bc);
   GotoXY(x,y+00); write(' - EDV-Service und -Beratung        ');
@@ -47,7 +47,7 @@ Procedure WriteDienst(x,y,tc,bc: integer);
   GotoXY(x,y+12); write('   ...                              ');
   end;
 
-Procedure WriteAdresse(x,y,tc,bc: integer);
+Procedure WriteAdresse(x,y,tc,bc: Int16);
   begin
   SetColor(tc,bc);
   GotoXY(x,y+00); write(' JME Engineering              ');
@@ -58,7 +58,7 @@ Procedure WriteAdresse(x,y,tc,bc: integer);
   GotoXY(x,y+05); write('');
   end;
 
-Procedure WriteKnowHow(x,y,tc,bc: integer);
+Procedure WriteKnowHow(x,y,tc,bc: Int16);
   begin
   SetColor(tc,bc);
   GotoXY(x,y+00); write(' Wenden Sie sich auch ');
@@ -69,14 +69,14 @@ Procedure WriteKnowHow(x,y,tc,bc: integer);
   GotoXY(x,y+05); write(' erst an.             ');
   end;
 
-Procedure WriteJMELogo(x,y,tc,bc: integer);
+Procedure WriteJMELogo(x,y,tc,bc: Int16);
   begin
   SetColor(tc,bc);
   GotoXY(x,y+00); write('  ÄÄÄÄÄÄÄÂÄÄÄÄÂÄÄÄÄÂÄÄÄÄÄÄÄ  ');
   GotoXY(x,y+01); write('  ÄÄÄÄÄÄÄÙ         ÀÄÄÄÄÄÄÄ  ');
   end;
 
-Procedure WriteNote(x,y,tc,bc: integer);
+Procedure WriteNote(x,y,tc,bc: Int16);
   begin
   SetColor(tc,bc);
   GotoXY(x,y+00); write(' Dieses Programm wurde von JME Engineering geschrieben und ');
@@ -85,7 +85,7 @@ Procedure WriteNote(x,y,tc,bc: integer);
   GotoXY(x,y+03); write(' Lauff„hig mit CGA-, Hercules-, EGA- und VGA-Grafikkarten. ');
   end;
 
-Procedure WritePressKey(x,y,tc1,bc1,tc2,bc2: integer);
+Procedure WritePressKey(x,y,tc1,bc1,tc2,bc2: Int16);
   begin
   GotoXY(x,y);
   SetColor(tc1,bc1);
@@ -96,7 +96,7 @@ Procedure WritePressKey(x,y,tc1,bc1,tc2,bc2: integer);
   write(' zu starten. ');
   end;
 
-Procedure WriteLoading(x,y,tc,bc: integer);
+Procedure WriteLoading(x,y,tc,bc: Int16);
   begin
   GotoXY(x,y);
   SetColor(tc,bc);

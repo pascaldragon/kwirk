@@ -14,20 +14,20 @@ uses
 
 Function LoadMazes(FN: PathStr): Boolean;
 Function SaveMazes(FN: PathStr): Boolean;
-Const MazeNr: integer = 0;
-Function CheckMazeP(var Maze: MazeType; y,x: integer; RandWert: integer): integer;
-Function CheckMaze(var Maze: MazeType; Compare: CharSet; y,x: integer; RandWert: integer): integer;
+Const MazeNr: Int16 = 0;
+Function CheckMazeP(var Maze: MazeType; y,x: Int16; RandWert: Int16): Int16;
+Function CheckMaze(var Maze: MazeType; Compare: CharSet; y,x: Int16; RandWert: Int16): Int16;
 Procedure KorregMaze(var Maze: MazeType);
 Procedure AddRoomMade(Room: Word);
 Function  GetNextRoom: Word;
 Function  IsRoomMade(Room: Word): Boolean;
-Function CalcDoorCenter(var M: MazeType; x,y: integer; var DoorX,DoorY: integer): Boolean;
-Procedure CalcDoorWings(var M: MazeType; x,y: integer; var re,ob,li,un: Boolean);
-Procedure MoveDoor(var Maze: MazeType; x,y: integer; ccw: Boolean; DrawDoor: Boolean);
-Function CheckDoorMovable(var Maze: MazeType; x,y: integer; ccw: Boolean): Boolean;
-Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer): Boolean;
-Procedure CalcBoxSize(var Maze: MazeType; xp,yp: integer; var x1,y1,x2,y2: integer);
-Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer);
+Function CalcDoorCenter(var M: MazeType; x,y: Int16; var DoorX,DoorY: Int16): Boolean;
+Procedure CalcDoorWings(var M: MazeType; x,y: Int16; var re,ob,li,un: Boolean);
+Procedure MoveDoor(var Maze: MazeType; x,y: Int16; ccw: Boolean; DrawDoor: Boolean);
+Function CheckDoorMovable(var Maze: MazeType; x,y: Int16; ccw: Boolean): Boolean;
+Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: Int16; dx,dy: Int16): Boolean;
+Procedure CalcBoxSize(var Maze: MazeType; xp,yp: Int16; var x1,y1,x2,y2: Int16);
+Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: Int16; dx,dy: Int16);
 
 implementation
 
@@ -39,8 +39,8 @@ Function LoadMazes(FN: PathStr): Boolean;
     s,s1: String;
        l: Byte absolute s;
       l1: Byte absolute s1;
-       i: integer;
-      ln: integer;
+       i: Int16;
+      ln: Int16;
     NextMaze: Boolean;
     NextName: String;
   begin
@@ -96,7 +96,7 @@ Function LoadMazes(FN: PathStr): Boolean;
 
 Procedure PutMaze(var T: Text; var M: MAzeType);
   var a: Boolean;
-    x,y: integer;
+    x,y: Int16;
   begin
   a:=False;
   writeln(T,'['+M.Name+']');
@@ -127,8 +127,8 @@ Function SaveMazes(FN: PathStr): Boolean;
     s,s1: String;
        l: Byte absolute s;
       l1: Byte absolute s1;
-       i: integer;
-      ln: integer;
+       i: Int16;
+      ln: Int16;
        a: Boolean;
   begin
   InOutRes:=0;
@@ -143,19 +143,19 @@ Function SaveMazes(FN: PathStr): Boolean;
   SaveMazes:=IOResult=0
   end;
 
-Function CheckMazeP(var Maze: MazeType; y,x: integer; RandWert: integer): integer;
+Function CheckMazeP(var Maze: MazeType; y,x: Int16; RandWert: Int16): Int16;
   begin
   if (x<1) or (x>Maze.xs) or (y<1) or (y>Maze.ys) then begin CheckMazeP:=RandWert; exit end;
   if Maze.P[y,x] then CheckMazeP:=1 else CheckMazeP:=0;
   end;
-Function CheckMaze(var Maze: MazeType; Compare: CharSet; y,x: integer; RandWert: integer): integer;
+Function CheckMaze(var Maze: MazeType; Compare: CharSet; y,x: Int16; RandWert: Int16): Int16;
   begin
   if (x<1) or (x>Maze.xs) or (y<1) or (y>Maze.ys) then begin CheckMaze:=RandWert; exit end;
   if Maze.M[y,x] in Compare then CheckMaze:=1 else CheckMaze:=0;
   end;
 
 Procedure KorregMaze(var Maze: MazeType);
-  var x,y,i: integer;
+  var x,y,i: Int16;
   begin
   Maze.nKwirks:=0;
   for x:=1 to Maze.xs do
@@ -243,7 +243,7 @@ Procedure KorregMaze(var Maze: MazeType);
       end;
   end;
 
-Function CalcDoorCenter(var M: MazeType; x,y: integer; var DoorX,DoorY: integer): Boolean;
+Function CalcDoorCenter(var M: MazeType; x,y: Int16; var DoorX,DoorY: Int16): Boolean;
   var r: Boolean;
   begin
   r:=True;
@@ -258,7 +258,7 @@ Function CalcDoorCenter(var M: MazeType; x,y: integer; var DoorX,DoorY: integer)
   CalcDoorCenter:=r
   end;
 
-Procedure CalcDoorWings(var M: MazeType; x,y: integer; var re,ob,li,un: Boolean);
+Procedure CalcDoorWings(var M: MazeType; x,y: Int16; var re,ob,li,un: Boolean);
   begin
   re:=CheckMaze(M,['µ'],y  ,x+1,0)=1;
   ob:=CheckMaze(M,['Ò'],y-1,x  ,0)=1;
@@ -266,9 +266,9 @@ Procedure CalcDoorWings(var M: MazeType; x,y: integer; var re,ob,li,un: Boolean)
   un:=CheckMaze(M,['Ð'],y+1,x  ,0)=1;
   end;
 
-Procedure MoveDoor(var Maze: MazeType; x,y: integer; ccw: Boolean; DrawDoor: Boolean);
-  var x1,y1: integer;
-      i0,i1: integer;
+Procedure MoveDoor(var Maze: MazeType; x,y: Int16; ccw: Boolean; DrawDoor: Boolean);
+  var x1,y1: Int16;
+      i0,i1: Int16;
       c0,c1: char;
   begin
   i0:=1*CheckMaze(Maze,['µ'],y  ,x+1,0)+
@@ -300,8 +300,8 @@ Procedure MoveDoor(var Maze: MazeType; x,y: integer; ccw: Boolean; DrawDoor: Boo
           end
   end;
 
-Function CheckDoorMovable(var Maze: MazeType; x,y: integer; ccw: Boolean): Boolean;
-  var       i,j: integer;
+Function CheckDoorMovable(var Maze: MazeType; x,y: Int16; ccw: Boolean): Boolean;
+  var       i,j: Int16;
               r: Boolean;
     re,li,ob,un,
     ro,lo,lu,ru: Boolean;
@@ -355,7 +355,7 @@ Function CheckDoorMovable(var Maze: MazeType; x,y: integer; ccw: Boolean): Boole
   CheckDoorMovable:=r
   end;
 
-Procedure CalcBoxSize(var Maze: MazeType; xp,yp: integer; var x1,y1,x2,y2: integer);
+Procedure CalcBoxSize(var Maze: MazeType; xp,yp: Int16; var x1,y1,x2,y2: Int16);
   var c: Char;
       e: Boolean;
   begin
@@ -383,8 +383,8 @@ Procedure CalcBoxSize(var Maze: MazeType; xp,yp: integer; var x1,y1,x2,y2: integ
   if (y1<1) or (y2>Maze.ys) then begin y1:=yp; y2:=yp end;
   end;
 
-Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer): Boolean;
-  var i: integer;
+Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: Int16; dx,dy: Int16): Boolean;
+  var i: Int16;
       r: Boolean;
   begin
   r:=True;
@@ -395,10 +395,10 @@ Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: intege
   CheckBoxMovable:=r
   end;
 
-Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer);
-  var x,y: integer;
+Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: Int16; dx,dy: Int16);
+  var x,y: Int16;
     x3,y3,
-    x4,y4: integer;
+    x4,y4: Int16;
         a: Boolean;
         T: LongInt;
   begin
