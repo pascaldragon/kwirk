@@ -28,11 +28,14 @@ Procedure WriteTime2(t: LongInt);
 Procedure ShowHelp;
 Function LoadImages(FN: PathStr): Boolean;
 Function MazeMenue(FN0: PathStr): PathStr;
+function SupportsMazeSelection: Boolean;
 Function Char2ImgNr(c: Char): integer;
 Function Char2ImgPtr(c: Char): Pointer;
 Procedure SetMazeImage(var Maze: MazeType; x,y: integer);
 Procedure SetImgMaze(var Maze: MazeType);
 Procedure DrawWater(x,y: Integer; Mode: Integer);
+procedure RendererDone;
+procedure RendererInit;
 
 implementation
 
@@ -190,6 +193,35 @@ Procedure DrawWater(x,y: Integer; Mode: Integer);
       DrawImage(x,y,Img[WatrWeg2],0,0,CopyPut);
     end;
   end;
+
+procedure RendererDone;
+begin
+  if not TextKwirk then
+    begin
+    {$if declared(TextMode)}
+    if (TextModeAtProgrammStart>=0) then TextMode(TextModeAtProgrammStart);
+    {$endif}
+    end
+  else begin
+    {$if declared(TextMode)}
+    NormVideo;
+    {$endif}
+    Write(' ');
+    ClrScr;
+    end;
+end;
+
+procedure RendererInit;
+begin
+  if not TextKwirk then
+    begin
+    if not LoadImages(ImgFn) then
+      begin
+      ExitGem;
+      InitError('IO-error while reading image file ['+ImgFn+']',False,False);
+      end;
+    end;
+end;
 
 
 Const  RoomPumOffs: integer = 1;
@@ -702,6 +734,11 @@ Procedure SetTextImage(c: Char; var Cell: CellType);
     'Z': begin s^:='<#>'; a^:=Yellow; end; { lokales Ziel }
     end;
   end;
+
+function SupportsMazeSelection: Boolean;
+begin
+  SupportsMazeSelection := not TextKwirk;
+end;
 
 Function Char2ImgNr(c: Char): integer;
   var f: integer;

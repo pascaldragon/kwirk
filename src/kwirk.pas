@@ -203,14 +203,7 @@ if ParamHelp then begin WriteSyntax(''); exit end;
 ShowJME;
 if (LastKey=-45) or (LastKey=Escap) then Halt;
 Init2; { Speicher fÅr Images allokieren }
-if not TextKwirk then
-  begin
-  if not LoadImages(ImgFn) then
-    begin
-    ExitGem;
-    InitError('IO-error while reading image file ['+ImgFn+']',False,False);
-    end;
-  end;
+RendererInit;
 ClrScr;
 Init3; { Grafik und Speed initiallisieren }
 Cfg.Init;
@@ -234,34 +227,22 @@ if not bGivenMaze then
     Cfg.ReadKeyName('LastQuest',MazFN);
     end;
   if MazFN='' then
-    if TextKwirk then MazFN:='GoingUp1.Maz';
+    if not SupportsMazeSelection then MazFN:='GoingUp1.Maz';
   end;
 repeat
-  if not bGivenMaze and not TextKwirk then
+  if not bGivenMaze and SupportsMazeSelection then
     MazFN:=MazeMenue(MazFN);
   //vUpcaseStr(MazFN);
   if MazFN<>'' then
     begin
     PlayMazeFile;
-    if not TextKwirk then
+    if SupportsMazeSelection then
       if Room>nMazes then begin Room:=1; Inc(MazeNr); MazFN:='.' end;
     end;
-until (MazFN='') or (LastKey=KeyF3) or (LastKey=ALT_X) or bGivenMaze or TextKwirk;
+until (MazFN='') or (LastKey=KeyF3) or (LastKey=ALT_X) or bGivenMaze or not SupportsMazeSelection;
 {if not TextKwirk then{} ExitGem;
 Cfg.Done;
-if not TextKwirk then
-  begin
-  {$if declared(TextMode)}
-  if (TextModeAtProgrammStart>=0) then TextMode(TextModeAtProgrammStart);
-  {$endif}
-  end
-else begin
-  {$if declared(TextMode)}
-  NormVideo;
-  {$endif}
-  Write(' ');
-  ClrScr;
-  end;
+RendererDone;
 GotoXY(1,1); TextColor(White);
 writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
 {$if declared(TextMode)}
