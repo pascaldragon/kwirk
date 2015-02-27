@@ -32,6 +32,7 @@ Function Char2ImgNr(c: Char): integer;
 Function Char2ImgPtr(c: Char): Pointer;
 Procedure SetMazeImage(var Maze: MazeType; x,y: integer);
 Procedure SetImgMaze(var Maze: MazeType);
+Procedure DrawWater(x,y: Integer; Mode: Integer);
 
 implementation
 
@@ -170,6 +171,26 @@ Procedure DrawField(var M: MazeType);
     end;
   DecMouseHide
   end;
+
+Procedure DrawWater(x,y: Integer; Mode: Integer);
+  begin
+  if TextKwirk then
+    begin
+    TextAttr:=LightBlue+16*Blue;
+    GotoFldXY(x,y);
+    if Mode=1 then
+      Write('ששש')
+    else
+      Write('OOO');
+    end
+  else begin
+    if Mode=1 then
+      DrawImage(x,y,Img[WatrWeg1],0,0,XOrPut)
+    else
+      DrawImage(x,y,Img[WatrWeg2],0,0,CopyPut);
+    end;
+  end;
+
 
 Const  RoomPumOffs: integer = 1;
 Function RoomMenue(Room0: integer): integer;

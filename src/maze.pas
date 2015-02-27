@@ -25,11 +25,14 @@ Function CalcDoorCenter(var M: MazeType; x,y: integer; var DoorX,DoorY: integer)
 Procedure CalcDoorWings(var M: MazeType; x,y: integer; var re,ob,li,un: Boolean);
 Procedure MoveDoor(var Maze: MazeType; x,y: integer; ccw: Boolean; DrawDoor: Boolean);
 Function CheckDoorMovable(var Maze: MazeType; x,y: integer; ccw: Boolean): Boolean;
+Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer): Boolean;
+Procedure CalcBoxSize(var Maze: MazeType; xp,yp: integer; var x1,y1,x2,y2: integer);
+Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer);
 
 implementation
 
 uses
-  Compat, Renderer;
+  Compat, Renderer, KW_Snd, CrtUtils;
 
 Function LoadMazes(FN: PathStr): Boolean;
   var  T: Text;
@@ -350,6 +353,116 @@ Function CheckDoorMovable(var Maze: MazeType; x,y: integer; ccw: Boolean): Boole
            end;
   { 4x1fach 4x90ø 2x180ø 4x3fach 1x4fach : 15 F„lle … 2 Richtungen }
   CheckDoorMovable:=r
+  end;
+
+Procedure CalcBoxSize(var Maze: MazeType; xp,yp: integer; var x1,y1,x2,y2: integer);
+  var c: Char;
+      e: Boolean;
+  begin
+  x1:=xp; x2:=xp; y1:=yp; y2:=yp;
+  c:=Maze.M[yp,xp];
+  if c='²' then exit;                    { Minni-Kiste }
+  if c in ['Ñ','Ø','Ï'] then
+    begin
+    while (y1>0)       and (Maze.M[y1,x1]<>'Ñ') do Dec(y1); { senkrechte Kiste }
+    while (y2<Maze.ys) and (Maze.M[y2,x2]<>'Ï') do Inc(y2);
+    end else
+  if c in ['Ç','×','¶'] then
+    begin
+    while (x1>0)       and (Maze.M[y1,x1]<>'Ç') do Dec(x1); { waagerechte Kiste }
+    while (x2<Maze.xs) and (Maze.M[y2,x2]<>'¶') do Inc(x2);
+    end else
+  if c in ['Ú','Ü','¿','Þ','Û','Ý','À','ß','Ù'] then
+    begin
+    while (x1>0)       and not(Maze.M[y1,x1] in ['Ú','Þ','À']) do Dec(x1); { Riesen-Kiste }
+    while (x2<Maze.xs) and not(Maze.M[y2,x2] in ['¿','Ý','Ù']) do Inc(x2);
+    while (y1>0)       and not(Maze.M[y1,x1] in ['Ú','Ü','¿']) do Dec(y1);
+    while (y2<Maze.ys) and not(Maze.M[y2,x2] in ['À','ß','Ù']) do Inc(y2);
+    end;
+  if (x1<1) or (x2>Maze.xs) then begin x1:=xp; x2:=xp end;
+  if (y1<1) or (y2>Maze.ys) then begin y1:=yp; y2:=yp end;
+  end;
+
+Function CheckBoxMovable(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer): Boolean;
+  var i: integer;
+      r: Boolean;
+  begin
+  r:=True;
+  if dx=-1 then for i:=y1 to y2 do if CheckMaze(Maze,[' ','J'],i,x1+dx,0)=0 then r:=False;
+  if dx= 1 then for i:=y1 to y2 do if CheckMaze(Maze,[' ','J'],i,x2+dx,0)=0 then r:=False;
+  if dy=-1 then for i:=x1 to x2 do if CheckMaze(Maze,[' ','J'],y1+dy,i,0)=0 then r:=False;
+  if dy= 1 then for i:=x1 to x2 do if CheckMaze(Maze,[' ','J'],y2+dy,i,0)=0 then r:=False;
+  CheckBoxMovable:=r
+  end;
+
+Procedure MoveBox(var Maze: MazeType; x1,y1,x2,y2: integer; dx,dy: integer);
+  var x,y: integer;
+    x3,y3,
+    x4,y4: integer;
+        a: Boolean;
+        T: LongInt;
+  begin
+  x3:=x1; y3:=y1; x4:=x2; y4:=y2;
+  if (dx=-1) or (dy=-1)
+    then begin
+      for x:=x1 to x2 do
+        for y:=y1 to y2 do
+          Maze.M[y+dy,x+dx]:=Maze.M[y,x];
+      if dx=-1 then for y:=y1 to y2 do Maze.M[y,x2]:=' '
+               else for x:=x1 to x2 do Maze.M[y2,x]:=' ';
+      Inc(x3,dx); Inc(y3,dy);
+      end
+    else begin
+      for x:=x2 downto x1 do
+        for y:=y2 downto y1 do
+          Maze.M[y+dy,x+dx]:=Maze.M[y,x];
+      if dx=1 then for y:=y1 to y2 do Maze.M[y,x1]:=' '
+              else for x:=x1 to x2 do Maze.M[y1,x]:=' ';
+      Inc(x4,dx); Inc(y4,dy);
+      end;
+
+  Inc(x1,dx); Inc(y1,dy); Inc(x2,dx); Inc(y2,dy);     { neue Kistenposition }
+  a:=True;
+  for x:=x1 to x2 do
+    for y:=y1 to y2 do
+      if not Maze.P[y,x] then a:=False;
+  if a then
+    begin
+    PlayFile('Fall*.*',True);
+    StartTimer(T);
+    for x:=x1 to x2 do                        { a=True -> Kiste versenken ! }
+      for y:=y1 to y2 do
+        begin
+        Maze.M[y,x]:=' ';
+        Maze.P[y,x]:=False;
+        ImgMaze[y,x].Line1[1]:=0;
+        ImgMaze[y,x].Mask1[1]:=0;
+        end;
+    for x:=x1 to x2 do
+      for y:=y1 to y2 do
+        begin
+        DrawWater(x,y,1);
+        ClearKbdRepeat;
+        end;
+    WaitTimerTick(T,WaterSpeed);
+    StartTimer(T);
+    for x:=x1 to x2 do
+      for y:=y1 to y2 do
+        begin
+        DrawWater(x,y,2);
+        ClearKbdRepeat;
+        end;
+    ClearKbdRepeat;
+    WaitTimerTick(T,WaterSpeed);
+    x3:=x1-1; y3:=y1-1; x4:=x2+1; y4:=y2+1;      { Refresh-Bereich anpassen }
+    end;
+
+  for x:=x3 to x4 do
+    for y:=y3 to y4 do
+      begin
+      SetMazeImage(Maze,x,y);
+      DrawMazeImage(Maze,x,y);
+      end;
   end;
 
 Procedure AddRoomMade(Room: Word);
