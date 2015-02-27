@@ -11,7 +11,6 @@ interface
 Function CheckTimeout(Tol: LongInt): Boolean;
 Procedure TriggerTimeout;
 Procedure Init1;
-Procedure Init2;
 Procedure Init3;
 Procedure InitError(s: String; Title,Help: Boolean);
 
@@ -63,20 +62,6 @@ Procedure Init1;
     //if not ParamHelp then InitError('Sorry, graphics-card or graphics-mode not supported in this version.',True,True);
   if QuestMakerFlag and (sConfig.Screen1 in [CGA,MCGA]) and (sConfig.Res1<CgaHi) then
     InitError('Need high resolution to run the QuestMaker.',True,True);
-  end;
-
-Procedure Init2;
-  var       i: integer;
-       MemErr: Boolean;
-  begin
-  i:=1; MemErr:=False;
-  while (i<=nImages) and not MemErr do
-    begin
-    MemErr:={$ifndef enable}False{$else}MaxAvail<3*SizeOf(ImgType){$endif};
-    if not MemErr then New(Img[i]);
-    Inc(i);
-    end;
-  if MemErr then InitError('To few memory to load the Images !',False,False);
   end;
 
 Procedure Init3;

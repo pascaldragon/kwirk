@@ -212,9 +212,20 @@ begin
 end;
 
 procedure RendererInit;
+var
+  i: Int16;
+  MemErr: Boolean;
 begin
   if not TextKwirk then
     begin
+    i:=1; MemErr:=False;
+    while (i<=nImages) and not MemErr do
+      begin
+      MemErr:={$ifndef enable}False{$else}MaxAvail<3*SizeOf(ImgType){$endif};
+      if not MemErr then New(Img[i]);
+      Inc(i);
+      end;
+    if MemErr then InitError('To few memory to load the Images !',False,False);
     if not LoadImages(ImgFn) then
       begin
       ExitGem;

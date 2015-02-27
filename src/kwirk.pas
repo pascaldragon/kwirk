@@ -202,7 +202,6 @@ if ParamHelp then begin WriteSyntax(''); exit end;
 {PlayFile('*.CMF');{}
 ShowJME;
 if (LastKey=-45) or (LastKey=Escap) then Halt;
-Init2; { Speicher fÅr Images allokieren }
 RendererInit;
 ClrScr;
 Init3; { Grafik und Speed initiallisieren }
