@@ -15,7 +15,7 @@ interface
 uses Dos,Config;
 
 const       nImages = 112;
-      MaxImgMemSize = {$ifdef fpc}1500{$else}500{$endif};
+      MaxImgMemSize = {$ifdef fpc}28 * 28 * SizeOf(LongInt){$else}500{$endif};
        MaxMazeXsize = 20; { 40; {}
        MaxMazeYsize = 18; { 18; {}
            MaxMazes = 50; { 50; {}
