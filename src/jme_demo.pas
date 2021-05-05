@@ -16,7 +16,7 @@ Procedure ShowJME;
 implementation
 
 uses
-  Compat;
+  Compat, CrtUtils;
 
 Procedure SetColor(tc,bc: Int16);
   begin
@@ -125,4 +125,4 @@ Procedure ShowJME;
   GotoXY(1,25); {$if declared(NormVideo)}NormVideo;{$endif}
   end;
 
-end.
+end.
