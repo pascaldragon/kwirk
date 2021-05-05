@@ -74,7 +74,12 @@ Procedure Init3;
     if not InitGem('') then Halt;
 
     if ImgFn = '' then
-      ImgFn := 'ptcimages.img';
+      if GetMaxColor <= High(Byte) then
+        ImgFn := 'kwirk8.img'
+      else if GetMaxColor <= High(Word) then
+        ImgFn := 'kwirk16.img'
+      else
+        ImgFn := 'kwirk32.img';
 
     if not LoadImages(ImgFn) then
       begin
