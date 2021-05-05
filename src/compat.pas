@@ -13,6 +13,11 @@ uses
   GraphUnit, CrtUnit,
   Config;
 
+{$if not declared(ColorType)}
+type
+  ColorType = Word;
+{$endif}
+
 function Int2StrL(aValue, aLength: Integer): String; inline;
 function Int2Str(aValue: Integer): String; inline;
 function Str2Int(aStr: String): Integer; inline;
@@ -45,7 +50,7 @@ procedure MouseShape(aShape: Integer);
 function InitGem(const aPath: String): Boolean;
 procedure ExitGem;
 
-function CalcColor(aColor: Word): Word;
+function CalcColor(aColor: ColorType): ColorType;
 
 function ReadKey2: Word;
 
@@ -225,7 +230,7 @@ begin
   Closegraph;
 end;
 
-function CalcColor(aColor: Word): Word;
+function CalcColor(aColor: ColorType): ColorType;
 type
   TRGBColor = record
     Red: Byte;
@@ -499,9 +504,14 @@ begin
       imgcol := EightBitColors[aColor]
     else
       imgcol := EightBitColors[0];
-    Result := (imgcol.red and $ff shr 3) shl (5 + 6) or
-                (imgcol.green and $ff shr 2) shl 5 or
-                (imgcol.blue and $ff shr 3);
+    if GetMaxColor <= High(Word) then
+      Result := (imgcol.red and $ff shr 3) shl (5 + 6) or
+                  (imgcol.green and $ff shr 2) shl 5 or
+                  (imgcol.blue and $ff shr 3)
+    else
+      Result := (LongInt(imgcol.Red and $ff) shl 16) or
+                (LongInt(imgcol.Green and $ff) shl 8) or
+                (LongInt(imgcol.Blue and $ff));
   {end else begin
     Result := aColor;
   end;}
