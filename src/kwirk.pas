@@ -185,7 +185,7 @@ Procedure PlayMazeFile;
       until (Room>nMazes) or (not bMadeIt and not bSkipIt and not bSkipBack);
       ClearHelpKey;
       end;
-  until TextKwirk or (Room=0) or (Room>nMazes) or (LastKey=KeyF3) or (LastKey=Alt_X);
+  until TextKwirk or (Room=0) or (Room>nMazes) or (LastKey=KeyF3) or (LastKey=Alt_X) or (LastKey=Ord('Q')-Ord('@'));
   end;
 
 var T: LongInt;
@@ -248,4 +248,4 @@ writeln('The Quest of Kwirk''s Castle             PC-Version by Joe M.  1991');
 NormVideo;
 {$endif}
 writeln;
-end.
+end.
