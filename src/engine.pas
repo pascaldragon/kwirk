@@ -84,7 +84,6 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
         if KwirkKeyPressed then
           begin
           c:=KwirkReadKey;
-          writeln(c);
           end
         else begin
           if QuickMoving
@@ -205,4 +204,4 @@ Function PlayKwirk(Const MazeP: MazeType): Boolean;
   {$endif}
   end;
 
-end.
+end.
