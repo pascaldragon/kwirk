@@ -10,7 +10,8 @@ Program Kwirk; { " The Quest of Kwirk's Castle " }
 {M 8000,0,655360}
 { $D-,L-}
 
-uses CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
+uses {$ifdef UNIX}cthreads,{$endif}
+     CrtUnit, GraphUnit, {GemBase,} {Str2Num,} {GemInit,}
      {StdSubs,} {vStrSubs,} {Num2Str,} DefBase, {QMake,} Engine, JME_Demo,
      KW_Snd, Compat, Renderer, GraphUtils, CrtUtils, Maze, Utils;
 
