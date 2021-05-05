@@ -18,7 +18,7 @@ implementation
 
 uses
   CrtUnit, GraphUnit,
-  Compat, DefBase;
+  Compat, DefBase, Renderer;
 
 Procedure InitError(s: String; Title,Help: Boolean);
   begin
@@ -57,8 +57,7 @@ Procedure Init1;
   if (sConfig.Screen1=HercMono) and (sConfig.Res1=HercMonoHi) then ImgFN:='KwirkHrc.Img' else
   if (sConfig.Screen1=Cga)      and (sConfig.Res1=CgaHi)      then ImgFN:='KwirkCHi.Img' else
   if (sConfig.Screen1=Cga)      and (sConfig.Res1 in [CgaC0..CgaC3]) then ImgFN:='KwirkCga.Img' else
-    (* fallback to VGA images for now *)
-    ImgFN := 'ptcimages.img';
+    ImgFN := '';
     //if not ParamHelp then InitError('Sorry, graphics-card or graphics-mode not supported in this version.',True,True);
   if QuestMakerFlag and (sConfig.Screen1 in [CGA,MCGA]) and (sConfig.Res1<CgaHi) then
     InitError('Need high resolution to run the QuestMaker.',True,True);
@@ -71,7 +70,18 @@ Procedure Init3;
           t0,t1: Real;
   begin
   ChgPalette:=False;
-  if not TextKwirk and not InitGem('') then Halt;
+  if not TextKwirk then begin
+    if not InitGem('') then Halt;
+
+    if ImgFn = '' then
+      ImgFn := 'ptcimages.img';
+
+    if not LoadImages(ImgFn) then
+      begin
+      ExitGem;
+      InitError('IO-error while reading image file ['+ImgFn+']',False,False);
+      end;
+  end;
   KwirkXSpeed:=MS2Tick(Round(100/ImgXsize));
   KwirkYSpeed:=MS2Tick(Round(100/ImgYsize));
   JumpSpeed  :=MS2Tick(40);

@@ -226,14 +226,8 @@ begin
       Inc(i);
       end;
     if MemErr then InitError('To few memory to load the Images !',False,False);
-    if not LoadImages(ImgFn) then
-      begin
-      ExitGem;
-      InitError('IO-error while reading image file ['+ImgFn+']',False,False);
-      end;
     end;
 end;
-
 
 Const  RoomPumOffs: Int16 = 1;
 Function RoomMenue(Room0: Int16): Int16;
