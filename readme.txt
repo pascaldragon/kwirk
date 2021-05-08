@@ -1,103 +1,103 @@
-        ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-        º     The Quest of Kwirk's Castle    PC-Version by Joe M.      º
-        ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+        â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+        â•‘     The Quest of Kwirk's Castle    PC-Version by Joe M.      â•‘
+        â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-        Dieses Programm wurde nicht fr kommerziellen Einsatz
+        Dieses Programm wurde nicht fÃ¼r kommerziellen Einsatz
         geschrieben, sondern lediglich dazu, ein wenig Abwechslung in
-        den meiát trockenen EDV-Alltag zu bringen (und vielleicht auch,
+        den meiÃŸt trockenen EDV-Alltag zu bringen (und vielleicht auch,
         um meine Fa. JME Engineering etwas bekannt zu machen).
 
-        Kwirk ist vollst„ndig in Turbo-Pascal implementiert.
+        Kwirk ist vollstÃ¤ndig in Turbo-Pascal implementiert.
         Sollte das Programm hier oder dort noch einige Fehler aufweisen,
-        so bitte ich zu bedenken, daá es sich hier um Public-Domain-
-        Software handelt, die mit dem geringsm”glichen Kosten- und
+        so bitte ich zu bedenken, daÃŸ es sich hier um Public-Domain-
+        Software handelt, die mit dem geringsmÃ¶glichen Kosten- und
         Zeitaufwand erstellt wurde (Entwicklungszeit ca. 2 Wochen) und
-        lediglich zu Freizeitvertreib und Vergngen, nicht fr professi-
+        lediglich zu Freizeitvertreib und VergnÃ¼gen, nicht fÃ¼r professi-
         onellen Einsatz dienen soll.
 
 
         Ziel des Spieles ist es, jeweils die Treppe (bzw. Fahne) oder
-        den „uáeren Spielfeldrand eines Raumes zu erreichen.
+        den Ã¤uÃŸeren Spielfeldrand eines Raumes zu erreichen.
 
         Mit den Cursortasten wird Kwirk bewegt. Sind mehrere Kwirks im
-        Raum, so k”nnen Sie mit der Entertaste zwischen diesen
+        Raum, so kÃ¶nnen Sie mit der Entertaste zwischen diesen
         umschalten.
 
-        Schieben Sie die Kisten vollst„ndig ins Wasser um sowohl das
+        Schieben Sie die Kisten vollstÃ¤ndig ins Wasser um sowohl das
         Wasser alsauch die Kiste zu beseitigen.
 
-        Nach Drcken der Backspacetaste wird der aktuelle Raum in seinen
-        ursprnglichen Zustand zurckversetzt.
+        Nach DrÃ¼cken der Backspacetaste wird der aktuelle Raum in seinen
+        ursprÃ¼nglichen Zustand zurÃ¼ckversetzt.
 
-        Mit der Tabulatortaste k”nnen Sie einen Raum berspringen.
+        Mit der Tabulatortaste kÃ¶nnen Sie einen Raum Ã¼berspringen.
 
-        Mit [Esc] gelangen Sie ins Auswahlmen zurck, mit [F3] beenden
+        Mit [Esc] gelangen Sie ins AuswahlmenÃ¼ zurÃ¼ck, mit [F3] beenden
         Sie das Programm.
 
         Geben Sie von der Dos-Kommandozeile   Kwirk ?   ein um weitere
         Informationen zu erhalten.
 
 
-        Erstellen eigener R„tzel:
+        Erstellen eigener RÃ¤tzel:
 
         Die Dateien mit der Extension .Maz (von Maze) enthalten die
-        R„tzel. Es handelt sich hierbei um reine Textdateien.
+        RÃ¤tzel. Es handelt sich hierbei um reine Textdateien.
 
-        Die erste Zeile einer R„tzeldatei enth„lt den Namen des R„tzels
+        Die erste Zeile einer RÃ¤tzeldatei enthÃ¤lt den Namen des RÃ¤tzels
         (in eckigen Klammern eingeschlossen, max. 32 Zeichen).
 
-        Die anschlieáend aufgefhrten R„ume sind jeweils durch eine in
+        Die anschlieÃŸend aufgefÃ¼hrten RÃ¤ume sind jeweils durch eine in
         eckigen Klammern eingeschlossene Zeile voneinander getrennt.
         Innerhalb der Eckigen Klammern steht der Name des folgenden
-        Raumes. Ein R„tzel kann maximal 50 R„ume enthalten.
+        Raumes. Ein RÃ¤tzel kann maximal 50 RÃ¤ume enthalten.
 
-        Beschreibung der R„ume:
+        Beschreibung der RÃ¤ume:
 
           W          - Wand
-          P          - Wasser (Pftze)
+          P          - Wasser (PfÃ¼tze)
           Z          - Ziel (Treppe)
           J          - Jump (an dieser Stelle springt der
                              Kwirk vor Freude in die Luft)
           K > ^ < V  - Kwirk Ausgangsposition (maximal 10 pro Raum)
 
 
-          ² B                         - kleine Kiste
+          â–“ B                         - kleine Kiste
 
-          Ç¶ Ç×¶ Ç××¶ BBBB            - waagerechte Kisten
+          ÃƒÃ‚ ÃƒÃŽÃ‚ ÃƒÃŽÃŽÃ‚ BBBB            - waagerechte Kisten
 
-          Ñ Ñ Ñ B                     - senkrechte Kisten
-          Ï Ø Ø B
-            Ï Ø B
-              Ï B
+          Ã Ã Ã B                     - senkrechte Kisten
+          Â¤ Ã Ã B
+            Â¤ Ã B
+              Â¤ B
 
-          Ú¿ ÚÜ¿ Ú¿ ÚÜÜÜ¿ ÚÜÜÜ¿ BBBBB - groáe Kisten
-          ÀÙ ÀßÙ ÞÝ ÀßßßÙ ÞÛÛÛÝ BBBBB
-                 ÀÙ       ÀßßßÙ BBBBB
+          â”Œâ” â”Œâ–„â” â”Œâ” â”Œâ–„â–„â–„â” â”Œâ–„â–„â–„â” BBBBB - groÃŸe Kisten
+          â””â”˜ â””â–€â”˜ ÃŒÂ¦ â””â–€â–€â–€â”˜ ÃŒâ–ˆâ–ˆâ–ˆÂ¦ BBBBB
+                 â””â”˜       â””â–€â–€â–€â”˜ BBBBB
 
           Die Beschreibung von Kisten durch ein oder mehrere B ist
-          nur m”glich, wenn die Kisten nicht eng beieinander stehen,
+          nur mÃ¶glich, wenn die Kisten nicht eng beieinander stehen,
           da das Programm ansonsten nicht in der Lage ist
-          festzustellen, welches B zu welcher Kiste geh”rt.
+          festzustellen, welches B zu welcher Kiste gehÃ¶rt.
 
 
-          Î            - Drehpunkt fr 4-flglige Tr
+          â•¬            - Drehpunkt fÃ¼r 4-flÃ¼glige TÃ¼r
 
-          Ì Ê ¹ Ë      - Drehpunkte fr 3-flglige Tren
+          â•  â•© â•£ â•¦      - Drehpunkte fÃ¼r 3-flÃ¼glige TÃ¼ren
 
-          » É È ¼ º Í  - Drehpunkte fr 2-flglige Tren
+          â•— â•” â•š â• â•‘ â•  - Drehpunkte fÃ¼r 2-flÃ¼glige TÃ¼ren
 
-          Ã Á ´ Â      - Drehpunkte fr 1-flglige Tren
+          â”œ â”´ â”¤ â”¬      - Drehpunkte fÃ¼r 1-flÃ¼glige TÃ¼ren
 
-           Ò           - Trflgel
-          Æ µ
-           Ð
+           ÃŠ           - TÃ¼rflÃ¼gel
+          Ã£ Ã
+           Ã°
 
-          Beispiele fr Tren:
-             Ò    Ò         Ò
-             º   ÆÎµ   Â   ÆÊµ   Éµ   ÆÍµ
-             Ð    Ð    Ð         Ð
+          Beispiele fÃ¼r TÃ¼ren:
+             ÃŠ    ÃŠ         ÃŠ
+             â•‘   Ã£â•¬Ã   â”¬   Ã£â•©Ã   â•”Ã   Ã£â•Ã
+             Ã°    Ã°    Ã°         Ã°
 
-          oder auch (nur m”glich, wenn die Tren nicht zu eng
+          oder auch (nur mÃ¶glich, wenn die TÃ¼ren nicht zu eng
                      beieinander stehen):
              D    D         D
              *   D*D   *   D*D   *D   D*D
@@ -105,14 +105,14 @@
 
 
           Wenn in einem Raum bereits in der Ausgangsposition eine
-          Kiste oder eine Tr zum Teil ber einer Wasserpftze stehen
-          soll, so muá dieser Raum in der Datei 2-fach nebeneinander
+          Kiste oder eine TÃ¼r zum Teil Ã¼ber einer WasserpfÃ¼tze stehen
+          soll, so muÃŸ dieser Raum in der Datei 2-fach nebeneinander
           dargestellt werden (getrennt durch das | Zeichen).
           Aus der rechten Abbildung des Raumes wird dann nur das
           Wasser interpretiert (siehe auch Datei GoingUp1.Maz - Floor5).
 
 
-        ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»
-        º  viel Spaá beim R„tzeln                              Joe M.  º
-        ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼
+        â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—
+        â•‘  viel SpaÃŸ beim RÃ¤tzeln                              Joe M.  â•‘
+        â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
