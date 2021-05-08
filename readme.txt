@@ -63,15 +63,15 @@
 
           ▓ B                         - kleine Kiste
 
-          ÃÂ ÃÎÂ ÃÎÎÂ BBBB            - waagerechte Kisten
+          ╟╢ ╟╫╢ ╟╫╫╢ BBBB            - waagerechte Kisten
 
-          Ð Ð Ð B                     - senkrechte Kisten
-          ¤ Ï Ï B
-            ¤ Ï B
-              ¤ B
+          ╤ ╤ ╤ B                     - senkrechte Kisten
+          ╧ ╪ ╪ B
+            ╧ ╪ B
+              ╧ B
 
           ┌┐ ┌▄┐ ┌┐ ┌▄▄▄┐ ┌▄▄▄┐ BBBBB - große Kisten
-          └┘ └▀┘ Ì¦ └▀▀▀┘ Ì███¦ BBBBB
+          └┘ └▀┘ ▐▌ └▀▀▀┘ ▐███▌ BBBBB
                  └┘       └▀▀▀┘ BBBBB
 
           Die Beschreibung von Kisten durch ein oder mehrere B ist
@@ -88,14 +88,14 @@
 
           ├ ┴ ┤ ┬      - Drehpunkte für 1-flüglige Türen
 
-           Ê           - Türflügel
-          ã Á
-           ð
+           ╥           - Türflügel
+          ╞ ╡
+           ╨
 
           Beispiele für Türen:
-             Ê    Ê         Ê
-             ║   ã╬Á   ┬   ã╩Á   ╔Á   ã═Á
-             ð    ð    ð         ð
+             ╥    ╥         ╥
+             ║   ╞╬╡   ┬   ╞╩╡   ╔╡   ╞═╡
+             ╨    ╨    ╨         ╨
 
           oder auch (nur möglich, wenn die Türen nicht zu eng
                      beieinander stehen):
